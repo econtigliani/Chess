@@ -1,5 +1,5 @@
 var moveBlack = require('../algorithm/Black').moveBlack;
-var moveWhite = require('../algorithm/White').moveWhite;
+var moveWhite = require('../strategies/White').moveWhite;
 
 function move(data){
 
