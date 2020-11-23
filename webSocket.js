@@ -1,7 +1,7 @@
 //importaciones
 var W3CWebSocket  = require('websocket').w3cwebsocket;
 var Challenged = require('./responses/challenged');
-//var My_Turn = require('./responses/my_turn');
+var My_Turn = require('./responses/my_turn');
 var fs = require('fs');
 const { TIMEOUT } = require('dns');
 

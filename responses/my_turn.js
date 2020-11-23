@@ -1,6 +1,6 @@
-var moveBlack = require('../algorithm/Black').moveBlack;
-var moveWhite = require('../strategies/White').moveWhite;
 
+var moveBlack = require('../strategies_colours/Black').moveBlack;
+var moveWhite = require('../strategies_colours/White').moveWhite;
 function move(data){
 
     if(data.actual_turn == 'black'){
