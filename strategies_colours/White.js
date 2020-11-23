@@ -9,13 +9,14 @@ let possibleMovementsWhite = [];
 function moveWhite(board) {
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
-    possibleMovementsWhite = [ ];
+    //console.log(possibleMovementsWhite)
+    possibleMovementsWhite = [ ]
 
-    //genero una matriz 
-    let table;
-         table = maketable(board);
+    //genero una table 
+    let table
+         table = maketable(board)
     
-    //itero sobre toda la matriz buscando mis piezas
+    //itero sobre toda la table buscando mis piezas
     for(let col = 0; col < 16; col++){
         for(let row = 0; row < 16; row++){
 
@@ -65,7 +66,7 @@ function moveWhite(board) {
     index = possibleMovementsWhite.findIndex( s => s.value == max);
 
     //console.log(possibleMovementsWhite)
-    // console.log(matriz)
+    // console.log(table)
 
     let result;
         result = {
@@ -78,36 +79,41 @@ function moveWhite(board) {
     
 
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
+    // console.log("result: ", result)
     return result;
 }
 
 function pawnMoves(table,row,col){
     // Move 2 places in the first movement.
-    if((row == 3 || row == 2 ) && (table[row - 1][col] == ' ') && (table[row - 2][col] == ' ')){
+    if((row == 12) && (table[row-1][col] == ' ') && (table[row-2][col] == ' ') ){
 
-        possibleMovementsWhite.push({
-            value: 1,
-            from_row: row,
-            from_col: col,
-            to_row: (row - 2),
-            to_col: col,
-        })
+        possibleMovementsWhite.push(
+            {
+                value: 2,
+                from_row: row,
+                from_col: col,
+                to_row: (row-2),
+                to_col: col
+            }
+        )
+    }       
+     //si todavia no se mueve y no tiene nada en las dos filas de adelante, que se mueva 2 filas
+     if((row == 12 ) && (table[row-1][col] == ' '  && table[row-2][col] == ' ' )){
+
+        possibleMovementsWhite.push(
+            {
+                value: 2,
+                from_row: row,
+                from_col: col,
+                to_row: (row-2),
+                to_col: col
+            }
+        )
     }
-    if((row == 2 ) && (table[row - 1][col] == ' ') && (table[row - 2][col] == ' ')){
-
-        possibleMovementsBlack.push({
-            value: 1,
-            from_row: row,
-            from_col: col,
-            to_row: (row - 2),
-            to_col: col,
-        })
-    }
-
     // Move 1 place
     if((table[row - 1][col] == ' ')) {
         possibleMovementsWhite.push({
-            value: 0,
+            value: 1,
             from_row: row,
             from_col: col,
             to_col: col,
@@ -116,7 +122,7 @@ function pawnMoves(table,row,col){
     }
 
     //Eat piece
-    if(blackPieces.includes(table[row - 1][col + 1])) {
+    /* if(blackPieces.includes(table[row - 1][col + 1])) {
         possibleMovementsWhite.push({
             value: 2,
             from_row: row,
@@ -135,7 +141,7 @@ function pawnMoves(table,row,col){
             to_row: (row - 1),
 
         })
-    }
+    } */
 
 }
 

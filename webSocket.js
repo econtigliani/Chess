@@ -50,6 +50,7 @@ ws.onmessage = ({data}) => {
         case 'your_turn':
             
             //envio el movimiento que realizo
+            console.log(data.data);
             ws.send(My_Turn.move(data.data));
             break;
 

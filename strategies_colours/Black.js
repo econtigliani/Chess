@@ -78,6 +78,7 @@ function moveBlack(board) {
     
 
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
+    //console.log(result)
     return result;
 }
 
@@ -86,7 +87,7 @@ function pawnMoves(table,row,col){
     if((row == 3 ) && (table[row + 1][col] == ' ') && (table[row + 2][col] == ' ')){
 
         possibleMovementsBlack.push({
-            value: 1,
+            value: 2,
             from_row: row,
             from_col: col,
             to_row: (row + 2),
@@ -94,10 +95,10 @@ function pawnMoves(table,row,col){
         })
     }
 
-    if((row == 2 ) && (table[row + 1][col] == ' ') && (table[row + 2][col] == ' ')){
+    if( (row == 2 ) && (table[row + 1][col] == ' ') && (table[row + 2][col] == ' ')){
 
         possibleMovementsBlack.push({
-            value: 1,
+            value: 3,
             from_row: row,
             from_col: col,
             to_row: (row + 2),
@@ -108,7 +109,7 @@ function pawnMoves(table,row,col){
     // Move 1 place
     if((table[row + 1][col] == ' ')) {
         possibleMovementsBlack.push({
-            value: 0,
+            value: 1,
             from_row: row,
             from_col: col,
             to_col: col,
@@ -117,7 +118,7 @@ function pawnMoves(table,row,col){
     }
 
     //Eat piece
-    if(whitePieces.includes(table[row + 1][col - 1])) {
+     /* if(whitePieces.includes(table[row + 1][col - 1])) {
         possibleMovementsBlack.push({
             value: 2,
             from_row: row,
@@ -137,7 +138,7 @@ function pawnMoves(table,row,col){
             to_row: (row + 1),
 
         })
-    }
+    }  */
 
 }
 
