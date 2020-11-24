@@ -122,7 +122,7 @@ function pawnMoves(table,row,col){
     }
 
     //Eat piece
-    /* if(blackPieces.includes(table[row - 1][col + 1])) {
+     if(blackPieces.includes(table[row - 1][col + 1])) {
         possibleMovementsWhite.push({
             value: 2,
             from_row: row,
@@ -141,7 +141,7 @@ function pawnMoves(table,row,col){
             to_row: (row - 1),
 
         })
-    } */
+    } 
 
 }
 

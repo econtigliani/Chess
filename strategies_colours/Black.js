@@ -118,7 +118,7 @@ function pawnMoves(table,row,col){
     }
 
     //Eat piece
-     /* if(whitePieces.includes(table[row + 1][col - 1])) {
+      if(whitePieces.includes(table[row + 1][col - 1])) {
         possibleMovementsBlack.push({
             value: 2,
             from_row: row,
@@ -138,8 +138,16 @@ function pawnMoves(table,row,col){
             to_row: (row + 1),
 
         })
-    }  */
+    }  
 
+}
+
+function queenMoves(table,row,col){
+    //Eat row
+    for (let i = 0; i <16 ; i++) {
+        
+        
+    }
 }
 
 //read board
