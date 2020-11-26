@@ -2,7 +2,8 @@ const { blackPieces, whitePieces } = require("../enums/pieces");
 const { letterToName } = require('../enums/letterToName');
 const { valuePieces } = require("../enums/valuePieces");
 const weightPieces = require("../enums/weightPieces").weightPieces;
-
+const max = 16;
+const min = 0;
 // matrix de movimientos posibles
 let possibleMovementsWhite = [];
 
@@ -39,7 +40,7 @@ function moveWhite(board) {
                     break;
 
                 case whitePieces[4]://Queen
-                    //queenMoves(table, row, col);
+                    queenMoves(table, row, col);
                     break;
 
                 case whitePieces[5]://King
@@ -144,7 +145,126 @@ function pawnMoves(table,row,col){
     } 
 
 }
-
+function queenMoves(table, row, col) {
+    for (let i = (row - 1 ); i > min; i++) {
+        if (blackPieces.includes(table[i][col])) {
+            possibleMovementsWhite.push({
+                value: 4,
+                from_row: row,
+                from_col: col,
+                to_col: col,
+                to_row: i,
+            })
+            break
+        }
+        if (whitePieces.includes(table[i][col])) {
+            possibleMovementsWhite.push({
+                value: 0,
+                from_row:row,
+                from_col: col,
+                to_col:col,
+                to_row: i+1,
+            }) 
+            break
+        }
+    }
+    // Eat diagonal derecha arriba
+    for (let i = (row - 1), j = (col - 1); i > min && j > min; i--, j--) {
+        
+        if (blackPieces.includes(table[i][j])) {
+            possibleMovementsWhite.push({
+                value: 10,
+                from_row: row,
+                from_col: col,
+                to_col: j,
+                to_row: i,
+            })
+            break
+        }
+        if (whitePieces.includes(table[i][j])) {
+            possibleMovementsWhite.push({
+                value: 0,
+                from_row: row,
+                from_col: col,
+                to_col: (j + 1),
+                to_row: (i + 1),
+            })
+            break
+        }
+    }
+    
+    // comer diagonal izquierda arriba
+    for (let i = (row - 1), j = (col + 1); i > min && j < max; i--, j++) {
+        if (blackPieces.includes(table[i][j])) {
+            possibleMovementsWhite.push({
+                value: 10,
+                from_row: row,
+                from_col: col,
+                to_col: j,
+                to_row: i,
+            })
+            break
+        }
+        if (whitePieces.includes(table[i][j])) {
+            possibleMovementsWhite.push({
+                value: 0,
+                from_row: row,
+                from_col: col,
+                to_col: (j - 1),
+                to_row: (i + 1),
+            })
+            break
+        }
+    }
+        // Eat diagonal derecha abajo
+        for (let i = (row + 1), j = (col + 1); i < max && j < max; i++, j++) {
+        
+            if (blackPieces.includes(table[i][j])) {
+                possibleMovementsWhite.push({
+                    value: 99,
+                    from_row: row,
+                    from_col: col,
+                    to_col: j,
+                    to_row: i,
+                })
+                break
+            }
+            if (whitePieces.includes(table[i][col])) {
+                possibleMovementsWhite.push({
+                    value: 0,
+                    from_row: row,
+                    from_col: col,
+                    to_col: (j - 1),
+                    to_row: (i - 1),
+                })
+                break
+            }
+        }
+        
+        // comer diagonal izquierda abajo
+        for (let i = (row + 1), j = (col - 1); i < max && j > min; i++, j--) {
+            if (blackPieces.includes(table[i][j])) {
+                possibleMovementsWhite.push({
+                    value: 90,
+                    from_row: row,
+                    from_col: col,
+                    to_col: j,
+                    to_row: i,
+                })
+                break
+            }
+            if (whitePieces.includes(table[i][col])) {
+                possibleMovementsWhite.push({
+                    value: 0,
+                    from_row: row,
+                    from_col: col,
+                    to_col: (j + 1),
+                    to_row: (i - 1),
+                })
+                break
+            }
+        }
+}
 //read board
 function maketable(board){
 
