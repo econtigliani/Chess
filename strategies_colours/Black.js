@@ -1,21 +1,23 @@
-import { blackPieces, whitePieces } from "../enums/pieces";
-import { letterToName } from '../enums/letterToName';
-import { valuePieces } from "../enums/valuePieces";
+const { blackPieces, whitePieces } = require("../enums/pieces")
+const { letterToName } = require('../enums/letterToName')
+const { valuePieces } = require("../enums/valuePieces")
+const weightPieces = require("../enums/weightPieces").weightPieces
+const {limitsBoard} = require ("../enums/limitsBoard")
 
-import { weightPieces } from "../enums/weightPieces";
 const max = 16;
 const min = 0;
+
 // matrix de movimientos posibles
-let possibleMovementsBlack = [];
+let possibleMovements = []
 
 function moveBlack(board) {
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
-    possibleMovementsBlack = [];
+    possibleMovements = []
 
     //genero una matriz 
-    let table;
-    table = maketable(board);
+    let table
+    table = maketable(board)
 
     //itero sobre toda la matriz buscando mis piezas
     for (let col = min; col < max; col++) {
@@ -32,11 +34,11 @@ function moveBlack(board) {
                     break
 
                 case blackPieces[2]://Bishop
-                    //bishopMoves(table, row, col)
+                    bishopMoves(table, row, col)
                     break;
 
                 case blackPieces[3]://Horse
-                    //horseMoves(table, row, col)
+                    horseMoves(table, row, col)
                     break
 
                 case blackPieces[4]://Queen
@@ -56,7 +58,7 @@ function moveBlack(board) {
     // busco cual de los resultados es el que tiene el mayor valor.
     let maxValue = 0
 
-    possibleMovementsBlack.forEach(pm => {
+    possibleMovements.forEach(pm => {
         if (pm.value >= maxValue) {
             maxValue = pm.value
         }
@@ -64,24 +66,24 @@ function moveBlack(board) {
 
     // guardo el indice de ese maximo
     let index = 0;
-    index = possibleMovementsBlack.findIndex(s => s.value == maxValue);
+    index = possibleMovements.findIndex(s => s.value == maxValue);
 
-    //console.log(possibleMovementsBlack)
-    console.table(table)
+    //console.log(possibleMovements)
+    //console.table(table)
 
 
     let result;
     result = {
-        value: possibleMovementsBlack[index].value,
-        from_row: possibleMovementsBlack[index].from_row,
-        from_col: possibleMovementsBlack[index].from_col,
-        to_row: possibleMovementsBlack[index].to_row,
-        to_col: possibleMovementsBlack[index].to_col,
+        value: possibleMovements[index].value,
+        from_row: possibleMovements[index].from_row,
+        from_col: possibleMovements[index].from_col,
+        to_row: possibleMovements[index].to_row,
+        to_col: possibleMovements[index].to_col,
     }
 
 
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
-    console.log(result)
+    //console.log(result)
     return result;
 }
 
@@ -89,7 +91,7 @@ function pawnMoves(table, row, col) {
     // Move 2 places in the first movement.
     if ((row == 3) && (table[row + 1][col] == ' ') && (table[row + 2][col] == ' ')) {
 
-        possibleMovementsBlack.push({
+        possibleMovements.push({
             value: 2,
             from_row: row,
             from_col: col,
@@ -100,7 +102,7 @@ function pawnMoves(table, row, col) {
 
     if ((row == 2) && (table[row + 1][col] == ' ') && (table[row + 2][col] == ' ')) {
 
-        possibleMovementsBlack.push({
+        possibleMovements.push({
             value: 3,
             from_row: row,
             from_col: col,
@@ -111,7 +113,7 @@ function pawnMoves(table, row, col) {
 
     // Move 1 place
     if ((table[row + 1][col] == ' ')) {
-        possibleMovementsBlack.push({
+        possibleMovements.push({
             value: 1,
             from_row: row,
             from_col: col,
@@ -122,7 +124,7 @@ function pawnMoves(table, row, col) {
 
     //Eat piece
     if (whitePieces.includes(table[row + 1][col - 1])) {
-        possibleMovementsBlack.push({
+        possibleMovements.push({
             value: 2,
             from_row: row,
             from_col: col,
@@ -133,7 +135,7 @@ function pawnMoves(table, row, col) {
     }
 
     if (whitePieces.includes(table[row + 1][col + 1])) {
-        possibleMovementsBlack.push({
+        possibleMovements.push({
             value: 2,
             from_row: row,
             from_col: col,
@@ -152,7 +154,7 @@ function rookMoves(table, row, col) {
     for (let i = (row + 1); i < max; i++) {
         if (blackPieces.includes(table[i][col])) {
             if (table[i - 1][col] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 8,
                     from_row: row,
                     from_col: col,
@@ -163,7 +165,7 @@ function rookMoves(table, row, col) {
             break dance;
         }
         if (whitePieces.includes(table[i][col])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 8,
                 from_row: row,
                 from_col: col,
@@ -178,7 +180,7 @@ function rookMoves(table, row, col) {
     for (let i = (row - 1); i > min; i--) {
         if (blackPieces.includes(table[i][col])) {
             if (table[i + 1][col] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 8,
                     from_row: row,
                     from_col: col,
@@ -189,7 +191,7 @@ function rookMoves(table, row, col) {
             break dance;
         }
         if (whitePieces.includes(table[i][col])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 8,
                 from_row: row,
                 from_col: col,
@@ -207,7 +209,7 @@ function rookMoves(table, row, col) {
 
         if (blackPieces.includes(table[row][i])) {
             if (table[row][i - 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 8,
                     from_row: row,
                     from_col: col,
@@ -218,7 +220,7 @@ function rookMoves(table, row, col) {
             break dance;
         }
         if (whitePieces.includes(table[row][i])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 8,
                 from_row: row,
                 from_col: col,
@@ -233,7 +235,7 @@ function rookMoves(table, row, col) {
     for (let i = (col - 1); i > min; i--) {
         if (blackPieces.includes(table[row][i])) {
             if (table[row][i + 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 8,
                     from_row: row,
                     from_col: col,
@@ -244,7 +246,7 @@ function rookMoves(table, row, col) {
             break
         }
         if (whitePieces.includes(table[row][i])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 8,
                 from_row: row,
                 from_col: col,
@@ -261,7 +263,7 @@ function bishopMoves(table, row, col) {
     for (let i = (row + 1), j = (col + 1); i < max && j < max; i++, j++) {
 
         if (whitePieces.includes(table[i][j])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 7,
                 from_row: row,
                 from_col: col,
@@ -272,7 +274,7 @@ function bishopMoves(table, row, col) {
         }
         if (blackPieces.includes(table[i][j])) {
             if (table[i - 1][j - 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 7,
                     from_row: row,
                     from_col: col,
@@ -287,7 +289,7 @@ function bishopMoves(table, row, col) {
     // comer diagonal izquierda arriba
     for (let i = (row + 1), j = (col - 1); i < max && j > min; i++, j--) {
         if (whitePieces.includes(table[i][j])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 7,
                 from_row: row,
                 from_col: col,
@@ -298,7 +300,7 @@ function bishopMoves(table, row, col) {
         }
         if (blackPieces.includes(table[i][j])) {
             if (table[i - 1][j + 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 7,
                     from_row: row,
                     from_col: col,
@@ -312,7 +314,7 @@ function bishopMoves(table, row, col) {
     //eat diagonal izquierda abajo
     for (let i = (row - 1), j = (col - 1); i > min && j > min; i--, j--) {
         if (whitePieces.includes(table[i][j])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 7,
                 from_row: row,
                 from_col: col,
@@ -321,9 +323,9 @@ function bishopMoves(table, row, col) {
             })
             break
         }
-        if (blackPieces.includes(table[i][col])) {
+        if (blackPieces.includes(table[i][j])) {
             if (table[i + 1][j + 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 7,
                     from_row: row,
                     from_col: col,
@@ -338,7 +340,7 @@ function bishopMoves(table, row, col) {
     for (let i = (row - 1), j = (col + 1); i > min && j < max; i--, j++) {
         if (whitePieces.includes(table[i][j])) {
 
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 7,
                 from_row: row,
                 from_col: col,
@@ -347,9 +349,9 @@ function bishopMoves(table, row, col) {
             })
             break
         }
-        if (blackPieces.includes(table[i][col])) {
+        if (blackPieces.includes(table[i][j])) {
             if (table[i + 1][j - 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 7,
                     from_row: row,
                     from_col: col,
@@ -373,12 +375,12 @@ function horseMoves(table, row, col) {
         let move_col = col + Y[i]
 
         // Check if each possible move is valid or not 
-        if (move_row > max || move_col > max || move_row < min || move_col < min) {
+        if (move_row >= max || move_row <= min || move_col >= max || move_col <= min) {
             break
         }
 
         if ((table[move_row][move_col] == ' ')) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 1,
                 from_row: row,
                 from_col: col,
@@ -387,7 +389,7 @@ function horseMoves(table, row, col) {
             })
         }
         if (whitePieces.includes(table[move_row][move_col])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 4,
                 from_row: row,
                 from_col: col,
@@ -406,7 +408,7 @@ function queenMoves(table, row, col) {
     for (let i = (row + 1); i < max; i++) {
         if (blackPieces.includes(table[i][col])) {
             if (table[i - 1][col] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 9,
                     from_row: row,
                     from_col: col,
@@ -417,7 +419,7 @@ function queenMoves(table, row, col) {
             break
         }
         if (whitePieces.includes(table[i][col])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 9,
                 from_row: row,
                 from_col: col,
@@ -431,7 +433,7 @@ function queenMoves(table, row, col) {
     for (let i = (row - 1); i > min; i--) {
         if (blackPieces.includes(table[i][col])) {
             if (table[i + 1][col] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 9,
                     from_row: row,
                     from_col: col,
@@ -442,7 +444,7 @@ function queenMoves(table, row, col) {
             break
         }
         if (whitePieces.includes(table[i][col])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 9,
                 from_row: row,
                 from_col: col,
@@ -459,7 +461,7 @@ function queenMoves(table, row, col) {
 
         if (blackPieces.includes(table[row][i])) {
             if (table[row][i - 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 9,
                     from_row: row,
                     from_col: col,
@@ -470,7 +472,7 @@ function queenMoves(table, row, col) {
             break
         }
         if (whitePieces.includes(table[row][i])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 9,
                 from_row: row,
                 from_col: col,
@@ -485,7 +487,7 @@ function queenMoves(table, row, col) {
     for (let i = (col - 1); i > min; i--) {
         if (blackPieces.includes(table[row][i])) {
             if (table[row][i + 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 9,
                     from_row: row,
                     from_col: col,
@@ -496,7 +498,7 @@ function queenMoves(table, row, col) {
             break
         }
         if (whitePieces.includes(table[row][i])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 10,
                 from_row: row,
                 from_col: col,
@@ -510,7 +512,7 @@ function queenMoves(table, row, col) {
      for (let i = (row + 1), j = (col + 1); i < max && j < max; i++, j++) {
 
         if (whitePieces.includes(table[i][j])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 10,
                 from_row: row,
                 from_col: col,
@@ -521,7 +523,7 @@ function queenMoves(table, row, col) {
         }
         if (blackPieces.includes(table[i][j])) {
             if (table[i - 1][j - 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 0,
                     from_row: row,
                     from_col: col,
@@ -536,7 +538,7 @@ function queenMoves(table, row, col) {
     // comer diagonal izquierda arriba
     for (let i = (row + 1), j = (col - 1); i < max && j > min; i++, j--) {
         if (whitePieces.includes(table[i][j])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 10,
                 from_row: row,
                 from_col: col,
@@ -547,7 +549,7 @@ function queenMoves(table, row, col) {
         }
         if (blackPieces.includes(table[i][j])) {
             if (table[i - 1][j + 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 0,
                     from_row: row,
                     from_col: col,
@@ -561,7 +563,7 @@ function queenMoves(table, row, col) {
     //eat diagonal izquierda abajo
     for (let i = (row - 1), j = (col - 1); i > min && j > min; i--, j--) {
         if (whitePieces.includes(table[i][j])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 10,
                 from_row: row,
                 from_col: col,
@@ -570,9 +572,9 @@ function queenMoves(table, row, col) {
             })
             break
         }
-        if (blackPieces.includes(table[i][col])) {
+        if (blackPieces.includes(table[i][j])) {
             if (table[i + 1][j + 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 0,
                     from_row: row,
                     from_col: col,
@@ -587,7 +589,7 @@ function queenMoves(table, row, col) {
     for (let i = (row - 1), j = (col + 1); i > min && j < max; i--, j++) {
         if (whitePieces.includes(table[i][j])) {
 
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 10,
                 from_row: row,
                 from_col: col,
@@ -596,9 +598,9 @@ function queenMoves(table, row, col) {
             })
             break
         }
-        if (blackPieces.includes(table[i][col])) {
+        if (blackPieces.includes(table[i][j])) {
             if (table[i + 1][j - 1] == ' ') {
-                possibleMovementsBlack.push({
+                possibleMovements.push({
                     value: 0,
                     from_row: row,
                     from_col: col,
@@ -624,12 +626,12 @@ function kingMoves(table, row, col) {
         let move_col = col + Y[i]
 
         // Check if each possible move is valid or not 
-        if (move_row > max || move_col > max || move_row < min || move_col < min) {
+        if (move_row >= max || move_row <= min || move_col >= max || move_col <= min) {
             break
         }
 
         if ((table[move_row][move_col] == ' ')) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 1,
                 from_row: row,
                 from_col: col,
@@ -638,7 +640,7 @@ function kingMoves(table, row, col) {
             })
         }
         if (whitePieces.includes(table[move_row][move_col])) {
-            possibleMovementsBlack.push({
+            possibleMovements.push({
                 value: 1,
                 from_row: row,
                 from_col: col,
@@ -668,6 +670,5 @@ function maketable(board) {
     return matrix;
 }
 
-const _moveBlack = moveBlack;
-export { _moveBlack as moveBlack };
+module.exports.moveBlack = moveBlack;
 
