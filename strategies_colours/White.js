@@ -2,8 +2,7 @@ const { blackPieces, whitePieces } = require("../enums/pieces")
 const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
-const max = 16
-const min = 0
+const {max, min} = require ("../enums/limitsBoard")
 
 // matrix de movimientos posibles
 let possibleMovements = [];
@@ -88,12 +87,12 @@ function moveWhite(board) {
 
 function pawnMoves(table,row,col){
     // Move 2 places in the first movement.
-    if((row == 12) && (table[row-1][col] == ' ') && (table[row-2][col] == ' ') ){
+    if((row == 13) && (table[row-1][col] == ' ') && (table[row-2][col] == ' ') ){
 
         possibleMovements.push(
             {
                 num:1,
-                value: 2,
+                value: valuePieces.Pawn * weightPieces.secondRowPawn,
                 from_row: row,
                 from_col: col,
                 to_row: (row-2),
@@ -107,7 +106,7 @@ function pawnMoves(table,row,col){
         possibleMovements.push(
             {
                 num:2,
-                value: 2,
+                value: valuePieces.Pawn * weightPieces.firstRowPawn,
                 from_row: row,
                 from_col: col,
                 to_row: (row-2),
@@ -116,22 +115,23 @@ function pawnMoves(table,row,col){
         )
     }
     // Move 1 place
-    if((table[row - 1][col] == ' ')) {
+    if(table[row - 1][col] == ' ') {
         possibleMovements.push({
-            num:3,
-            value: 1,
+            num: 3,
+            value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((row - 9) * 10)),
             from_row: row,
             from_col: col,
             to_col: col,
             to_row: (row - 1),
         })
     }
+    
 
     //Eat piece
      if(blackPieces.includes(table[row - 1][col + 1])) {
         possibleMovements.push({
             num:4,
-            value: 2,
+            value: ((valuePieces[letterToName[table[row - 1][col + 1]]]) * weightPieces.eating),
             from_row: row,
             from_col: col,
             to_col: (col + 1),
@@ -142,7 +142,7 @@ function pawnMoves(table,row,col){
     if(blackPieces.includes(table[row - 1][col - 1])) {
         possibleMovements.push({
             num:5,
-            value: 0,
+            value: ((valuePieces[letterToName[table[row - 1][col - 1]]]) * weightPieces.eating),
             from_row: row,
             from_col: col,
             to_col: (col - 1),
@@ -162,7 +162,7 @@ function rookMoves(table,row,col){
            if (table[i - 1][col] == ' ') {
                possibleMovements.push({
                    num:6,
-                   value: 0,
+                   value: valuePieces.Rook,
                    from_row: row,
                    from_col: col,
                    to_col: col,
@@ -174,7 +174,7 @@ function rookMoves(table,row,col){
        if (blackPieces.includes(table[i][col])) {
            possibleMovements.push({
                num: 7,
-               value: 8,
+               value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                from_row: row,
                from_col: col,
                to_col: col,
@@ -190,7 +190,7 @@ function rookMoves(table,row,col){
            if (table[i + 1][col] == ' ') {
                possibleMovements.push({
                    num:8,   
-                   value: 8,
+                   value: valuePieces.Rook,
                    from_row: row,
                    from_col: col,
                    to_col: col,
@@ -202,7 +202,7 @@ function rookMoves(table,row,col){
        if (blackPieces.includes(table[i][col])) {
            possibleMovements.push({
             num: 9,   
-            value: 8,
+            value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                from_row: row,
                from_col: col,
                to_col: col,
@@ -221,7 +221,7 @@ function rookMoves(table,row,col){
            if (table[row][i - 1] == ' ') {
                possibleMovements.push({
                    num:10,
-                   value: 0,
+                   value: valuePieces.Rook,
                    from_row: row,
                    from_col: col,
                    to_col: i - 1,
@@ -233,7 +233,7 @@ function rookMoves(table,row,col){
        if (blackPieces.includes(table[row][i])) {
            possibleMovements.push({
                num: 11,
-               value: 8,
+               value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                from_row: row,
                from_col: col,
                to_col: i,
@@ -249,7 +249,7 @@ function rookMoves(table,row,col){
            if (table[row][i + 1] == ' ') {
                possibleMovements.push({
                    num:12,
-                   value: 0,
+                   value: valuePieces.Rook,
                    from_row: row,
                    from_col: col,
                    to_col: i + 1,
@@ -261,7 +261,7 @@ function rookMoves(table,row,col){
        if (blackPieces.includes(table[row][i])) {
            possibleMovements.push({
                num:13,
-               value: 8,
+               value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                from_row: row,
                from_col: col,
                to_col: i,
@@ -279,7 +279,7 @@ function bishopMoves(table,row,col){
         if (blackPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num:14,
-                value: 8,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -291,7 +291,7 @@ function bishopMoves(table,row,col){
             if (table[i - 1][j - 1] == ' ') {
                 possibleMovements.push({
                     num: 15,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j - 1),
@@ -307,7 +307,7 @@ function bishopMoves(table,row,col){
         if (blackPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num: 16,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -319,7 +319,7 @@ function bishopMoves(table,row,col){
             if (table[i - 1][j + 1] == ' ') {
                 possibleMovements.push({
                     num: 17,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j + 1),
@@ -334,7 +334,7 @@ function bishopMoves(table,row,col){
         if (blackPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num: 18,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -342,11 +342,11 @@ function bishopMoves(table,row,col){
             })
             break
         }
-        if (whitePieces.includes(table[i][col])) {
+        if (whitePieces.includes(table[i][j])) {
             if (table[i + 1][j + 1] == ' ') {
                 possibleMovements.push({
                     num: 19,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j + 1),
@@ -362,7 +362,7 @@ function bishopMoves(table,row,col){
 
             possibleMovements.push({
                 num:20,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -374,7 +374,7 @@ function bishopMoves(table,row,col){
             if (table[i + 1][j - 1] == ' ') {
                 possibleMovements.push({
                     num:21,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j - 1),
@@ -403,7 +403,7 @@ function horseMoves(table, row, col) {
         if ((table[move_row][move_col] == ' ')) {
             possibleMovements.push({
                 num:22,
-                value: 0,
+                value: valuePieces.Horse,
                 from_row: row,
                 from_col: col,
                 to_col: move_col,
@@ -413,7 +413,7 @@ function horseMoves(table, row, col) {
         if (blackPieces.includes(table[move_row][move_col])) {
             possibleMovements.push({
                 num:23,
-                value: 4,
+                value: ((valuePieces[letterToName[table[move_row][move_col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: move_col,
@@ -433,7 +433,7 @@ function queenMoves(table, row, col) {
             if (table[i - 1][col] == ' ') {
                 possibleMovements.push({
                     num:24,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: col,
@@ -445,7 +445,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[i][col])) {
             possibleMovements.push({
                 num:25,
-                value: 8,
+                value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: col,
@@ -461,7 +461,7 @@ function queenMoves(table, row, col) {
             if (table[i + 1][col] == ' ') {
                 possibleMovements.push({
                     num:26,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: col,
@@ -473,7 +473,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[i][col])) {
             possibleMovements.push({
                 num:27,
-                value: 8,
+                value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: col,
@@ -492,7 +492,7 @@ function queenMoves(table, row, col) {
             if (table[row][i - 1] == ' ') {
                 possibleMovements.push({
                     num:28,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: i - 1,
@@ -504,7 +504,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[row][i])) {
             possibleMovements.push({
                 num:29,
-                alue: 8,
+                alue: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: i,
@@ -520,7 +520,7 @@ function queenMoves(table, row, col) {
             if (table[row][i + 1] == ' ') {
                 possibleMovements.push({
                     num:30,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: i + 1,
@@ -532,7 +532,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[row][i])) {
             possibleMovements.push({
                 num:31,
-                value: 8,
+                value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: i,
@@ -549,7 +549,7 @@ function queenMoves(table, row, col) {
             if (table[i - 1][j - 1] == ' ') {
                 possibleMovements.push({
                     num:32,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: (j - 1),
@@ -561,7 +561,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num:33,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -576,7 +576,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num:34,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -588,7 +588,7 @@ function queenMoves(table, row, col) {
             if (table[i - 1][j + 1] == ' ') {
                 possibleMovements.push({
                     num:35,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: (j + 1),
@@ -603,7 +603,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num:36,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -615,7 +615,7 @@ function queenMoves(table, row, col) {
             if (table[i + 1][j + 1] == ' ') {
                 possibleMovements.push({
                     num:37,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: (j + 1),
@@ -632,7 +632,7 @@ function queenMoves(table, row, col) {
             if (table[i + 1][j - 1] == ' ') {
                 possibleMovements.push({
                     num:38,
-                    value: 0,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: (j - 1),
@@ -645,7 +645,7 @@ function queenMoves(table, row, col) {
 
             possibleMovements.push({
                 num:39,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -675,7 +675,7 @@ function kingMoves(table, row, col) {
         if ((table[move_row][move_col] == ' ')) {
             possibleMovements.push({
                 num:40,
-                value: 0,
+                value: valuePieces.King,
                 from_row: row,
                 from_col: col,
                 to_col: move_col,
@@ -685,7 +685,7 @@ function kingMoves(table, row, col) {
         if (blackPieces.includes(table[move_row][move_col])) {
             possibleMovements.push({
                 num:41,
-                value: 1,
+                value: ((valuePieces[letterToName[table[move_row][move_col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: move_col,
