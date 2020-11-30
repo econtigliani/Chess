@@ -1,10 +1,22 @@
-function bishopMoves(table,row,col){
+const { whitePieces, blackPieces } = require("../enums/pieces");
+
+function bishopMoves(table,row,col,turnColor){
+    
+    if (turnColor == 'white') {
+        turnPieces = whitePieces
+        counterPieces = blackPieces
+    } else {
+        turnPieces = blackPieces
+        counterPieces = whitePieces
+    }
+    
+    let possibleMovements = [];
     for (let i = (row + 1), j = (col + 1); i < max && j < max; i++, j++) {
 
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num:14,
-                value: 8,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -16,7 +28,7 @@ function bishopMoves(table,row,col){
             if (table[i - 1][j - 1] == ' ') {
                 possibleMovements.push({
                     num: 15,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j - 1),
@@ -32,7 +44,7 @@ function bishopMoves(table,row,col){
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num: 16,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -44,7 +56,7 @@ function bishopMoves(table,row,col){
             if (table[i - 1][j + 1] == ' ') {
                 possibleMovements.push({
                     num: 17,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j + 1),
@@ -59,7 +71,7 @@ function bishopMoves(table,row,col){
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num: 18,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -67,11 +79,11 @@ function bishopMoves(table,row,col){
             })
             break
         }
-        if (turnPieces.includes(table[i][col])) {
+        if (turnPieces.includes(table[i][j])) {
             if (table[i + 1][j + 1] == ' ') {
                 possibleMovements.push({
                     num: 19,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j + 1),
@@ -87,7 +99,7 @@ function bishopMoves(table,row,col){
 
             possibleMovements.push({
                 num:20,
-                value: 7,
+                value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
@@ -99,7 +111,7 @@ function bishopMoves(table,row,col){
             if (table[i + 1][j - 1] == ' ') {
                 possibleMovements.push({
                     num:21,
-                    value: 0,
+                    value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,
                     to_col: (j - 1),
@@ -109,4 +121,7 @@ function bishopMoves(table,row,col){
             break
         }
     }
+    return possibleMovements;
 }
+
+module.exports.bishopMoves = bishopMoves;

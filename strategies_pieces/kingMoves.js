@@ -1,5 +1,14 @@
-function kingMoves(table, row, col) {
+function kingMoves(table, row, col, turnColor) {
+       
+    if (turnColor == 'white') {
+        turnPieces = whitePieces
+        counterPieces = blackPieces
+    } else {
+        turnPieces = blackPieces
+        counterPieces = whitePieces
+    }
 
+    let possibleMovements = []
     // All possible moves of a knight 
     let X = [1, -1, 0, 0]
     let Y = [0, 0, 1, -1]
@@ -17,17 +26,17 @@ function kingMoves(table, row, col) {
         if ((table[move_row][move_col] == ' ')) {
             possibleMovements.push({
                 num:40,
-                value: 0,
+                value: valuePieces.King,
                 from_row: row,
                 from_col: col,
                 to_col: move_col,
                 to_row: move_row,
             })
         }
-        if (blackPieces.includes(table[move_row][move_col])) {
+        if (counterPieces.includes(table[move_row][move_col])) {
             possibleMovements.push({
                 num:41,
-                value: 1,
+                value: ((valuePieces[letterToName[table[move_row][move_col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: move_col,
@@ -35,5 +44,6 @@ function kingMoves(table, row, col) {
             })
         }
     }
-
+    return possibleMovements
 }
+module.exports.kingMoves = kingMoves;
