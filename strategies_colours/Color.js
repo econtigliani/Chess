@@ -1,4 +1,5 @@
 const { max, min } = require("../enums/limitsBoard")
+const { whitePieces, blackPieces } = require("../enums/pieces");
 
 function moveColor(board,color){
 
@@ -35,7 +36,7 @@ console.table(table)
 
 let result;
     result = {
-        num: possibleMovements[index].num,
+        //num: possibleMovements[index].num,
         value: possibleMovements[index].value,
         from_row: possibleMovements[index].from_row,
         from_col: possibleMovements[index].from_col,
@@ -49,7 +50,7 @@ console.log("result: ", result)
 return result;
 }
 
-function moveBlack(board,turnColor) {
+function moveBlack(table) {
 
     //itero sobre toda la table buscando mis piezas
     for (let col = min; col < max; col++) {
@@ -89,7 +90,7 @@ function moveBlack(board,turnColor) {
   
 }
 
-function moveWhite(board,turnColor) {
+function moveWhite(table) {
 
     //itero sobre toda la table buscando mis piezas
     for(let col = min; col < max; col++){
