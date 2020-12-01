@@ -718,4 +718,12 @@ function maketable(board){
     return matrix;
 }
 
-module.exports.moveWhite = moveWhite;
+module.exports ={
+    moveWhite: moveWhite,
+    bishopMoves: bishopMoves,
+    rookMoves: rookMoves,
+    queenMoves: queenMoves,
+    horseMoves: horseMoves,
+    kingMoves: kingMoves,
+    pawnMoves: pawnMoves,
+}
