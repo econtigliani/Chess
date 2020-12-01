@@ -1,3 +1,9 @@
+const { blackPieces, whitePieces } = require("../enums/pieces")
+const { letterToName } = require('../enums/letterToName')
+const { valuePieces } = require("../enums/valuePieces")
+const weightPieces = require("../enums/weightPieces").weightPieces
+const { max, min } = require("../enums/limitsBoard")
+
 function kingMoves(table, row, col, turnColor) {
        
     if (turnColor == 'white') {

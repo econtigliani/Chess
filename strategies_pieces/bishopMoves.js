@@ -1,4 +1,9 @@
-const { whitePieces, blackPieces } = require("../enums/pieces");
+
+const { blackPieces, whitePieces } = require("../enums/pieces")
+const { letterToName } = require('../enums/letterToName')
+const { valuePieces } = require("../enums/valuePieces")
+const weightPieces = require("../enums/weightPieces").weightPieces
+const { max, min } = require("../enums/limitsBoard")
 
 function bishopMoves(table,row,col,turnColor){
     

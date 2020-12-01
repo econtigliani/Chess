@@ -504,7 +504,7 @@ function queenMoves(table, row, col) {
         if (blackPieces.includes(table[row][i])) {
             possibleMovements.push({
                 num:29,
-                alue: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
+                value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: i,

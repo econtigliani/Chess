@@ -1,3 +1,9 @@
+const { blackPieces, whitePieces } = require("../enums/pieces")
+const { letterToName } = require('../enums/letterToName')
+const { valuePieces } = require("../enums/valuePieces")
+const weightPieces = require("../enums/weightPieces").weightPieces
+const { max, min } = require("../enums/limitsBoard")
+
 function queenMoves(table, row, col, turnColor) {
        
     if (turnColor == 'white') {
@@ -88,7 +94,7 @@ function queenMoves(table, row, col, turnColor) {
         if (counterPieces.includes(table[row][i])) {
             possibleMovements.push({
                 num:29,
-                alue: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
+                value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: i,

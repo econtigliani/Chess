@@ -1,23 +1,30 @@
 const { max, min } = require("../enums/limitsBoard")
 const { whitePieces, blackPieces } = require("../enums/pieces");
+const { pawnMovesBlack, pawnMovesWhite } = require("../strategies_pieces/pawnMoves");
+const { rookMoves } = require("../strategies_pieces/rookMoves");
+const { bishopMoves }= require("../strategies_pieces/bishopMoves");
+const { kingMoves } = require("../strategies_pieces/kingMoves")
+const { queenMoves } = require("../strategies_pieces/queenMoves")
+const { horseMoves } = require("../strategies_pieces/horseMoves");
 
-function moveColor(board,color){
+
+function moveColor(board,colour){
 
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
-    possibleMovements = []
+   let possibleMovements = []
 
     //genero una matriz 
     let table
     table = maketable(board)
 
-    if (colour = 'white') {
-    moveWhite(board)        
+    if (colour == 'white') {
+   possibleMovements= moveWhite(table)        
     } else {
-    moveBlack(board)
+   possibleMovements= moveBlack(table)
     }
 
-
+console.log(possibleMovements)
 // busco cual de los resultados es el que tiene el mayor valor.
 let maxValue = 0; 
 
@@ -31,12 +38,12 @@ possibleMovements.forEach(pm => {
 let index = 0;
 index = possibleMovements.findIndex( s => s.value == maxValue);
 
-//console.log(possibleMovements)
+console.log(possibleMovements)
 console.table(table)
 
 let result;
     result = {
-        //num: possibleMovements[index].num,
+        num: possibleMovements[index].num,
         value: possibleMovements[index].value,
         from_row: possibleMovements[index].from_row,
         from_col: possibleMovements[index].from_col,
@@ -51,7 +58,7 @@ return result;
 }
 
 function moveBlack(table) {
-
+    let possibleMovements = []
     //itero sobre toda la table buscando mis piezas
     for (let col = min; col < max; col++) {
         for (let row = min; row < max; row++) {
@@ -59,27 +66,27 @@ function moveBlack(table) {
             switch (table[row][col]) {
 
                 case blackPieces[0]://Pawn
-                    pawnMoves(table, row, col,'black')
+                possibleMovements.push(pawnMovesBlack(table, row, col))
                     break
 
                 case blackPieces[1]://Rook
-                    rookMoves(table, row, col, 'black')
+                possibleMovements.push(rookMoves(table, row, col, 'black'))
                     break
 
                 case blackPieces[2]://Bishop
-                    bishopMoves(table, row, col, 'black')
+                possibleMovements.push(bishopMoves(table, row, col, 'black'))
                     break;
 
                 case blackPieces[3]://Horse
-                    horseMoves(table, row, col, 'black')
+                possibleMovements.push(horseMoves(table, row, col, 'black'))
                     break
 
                 case blackPieces[4]://Queen
-                    queenMoves(table, row, col, 'black')
+                possibleMovements.push(queenMoves(table, row, col, 'black'))
                     break
 
                 case blackPieces[5]://King
-                    kingMoves(table, row, col, 'black')
+                possibleMovements.push(kingMoves(table, row, col, 'black'))
                     break
 
                 default:
@@ -87,11 +94,11 @@ function moveBlack(table) {
             }
         }
     }
-  
+  return possibleMovements
 }
 
 function moveWhite(table) {
-
+    let possibleMovements = []
     //itero sobre toda la table buscando mis piezas
     for(let col = min; col < max; col++){
         for(let row = min; row < max; row++){
@@ -99,27 +106,27 @@ function moveWhite(table) {
             switch (table[row][col]){
 
                 case whitePieces[0]://Pawn
-                    pawnMoves(table, row, col, 'white');
+                possibleMovements.push(pawnMovesWhite(table, row, col))
                     break;
 
                 case whitePieces[1]://Rook
-                    rookMoves(table, row, col, 'white');
+                possibleMovements.push(rookMoves(table, row, col, 'white'))
                     break;
 
                 case whitePieces[2]://Bishop
-                    bishopMoves(table, row, col, 'white');
+                possibleMovements.push(bishopMoves(table, row, col, 'white'))
                     break;
 
                 case whitePieces[3]://Horse
-                    horseMoves(table, row, col, 'white')
+                possibleMovements.push(horseMoves(table, row, col, 'white'))
                     break;
 
                 case whitePieces[4]://Queen
-                    queenMoves(table, row, col, 'white');
+                possibleMovements.push(queenMoves(table, row, col, 'white'))
                     break;
 
                 case whitePieces[5]://King
-                    kingMoves(table, row, col, 'white');
+                possibleMovements.push(kingMoves(table, row, col, 'white'))
                     break;
 
                 default:
@@ -127,7 +134,7 @@ function moveWhite(table) {
             }
         }
     }
-  
+  return possibleMovements
 }
 
 
