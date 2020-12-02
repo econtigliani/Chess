@@ -101,7 +101,14 @@ let table = [
 
 describe('pruebas para peones', () =>{
     test('Move 2 places in the first movement', () =>{
-        expect(pawnMoves(table,0,0).toBe(3)
-
-    })
-})
+        expect(pawnMoves(table,12,0)).toBe( 
+          {
+            num: 2,
+            value: 110,
+            from_row: 12,
+            from_col: 0,
+            to_row: 10,
+            to_col: 0
+          })
+        })
+      })
