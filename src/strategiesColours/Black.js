@@ -18,32 +18,33 @@ function moveBlack(table) {
             switch (table[row][col]) {
 
                 case blackPieces[0]://Pawn
-                    possibleMovements = possibleMovements.concat(pawnMovesBlack(table, row, col))
+                    temp = pawnMovesBlack(table, row, col)
                     break
 
                 case blackPieces[1]://Rook
-                    possibleMovements = possibleMovements.concat(rookMoves(table, row, col, color))
+                    temp = rookMoves(table, row, col, color)
                     break
 
                 case blackPieces[2]://Bishop
-                    possibleMovements.push(bishopMoves(table, row, col, color))
+                    temp = bishopMoves(table, row, col, color)
                     break;
 
                 case blackPieces[3]://Horse
-                    possibleMovements = possibleMovements.concat(horseMoves(table, row, col, color))
+                    temp = horseMoves(table, row, col, color)
                     break
 
                 case blackPieces[4]://Queen
-                    possibleMovements = possibleMovements.concat(queenMoves(table, row, col, color))
+                    temp = queenMoves(table, row, col, color)
                     break
 
                 case blackPieces[5]://King
-                    possibleMovements = possibleMovements.concat(kingMoves(table, row, col, color))
+                    temp = kingMoves(table, row, col, color)
                     break
 
                 default:
                     break
             }
+            possibleMovements = possibleMovements.concat(temp)
         }
     }
     return possibleMovements

@@ -9,6 +9,7 @@ const { max, min } = require("../enums/limitsBoard")
 
 function moveWhite(table) {
     let possibleMovements = []
+    let temp = []
     const color = 'white'
     //itero sobre toda la table buscando mis piezas
     for (let col = min; col < max; col++) {
@@ -17,32 +18,33 @@ function moveWhite(table) {
             switch (table[row][col]) {
 
                 case whitePieces[0]://Pawn
-                    possibleMovements = possibleMovements.concat(pawnMovesWhite(table, row, col))
+                    temp = pawnMovesWhite(table, row, col)
                     break;
 
                 case whitePieces[1]://Rook
-                    possibleMovements = possibleMovements.concat(rookMoves(table, row, col, color))
+                    temp = rookMoves(table, row, col, color)
                     break;
 
                 case whitePieces[2]://Bishop
-                    possibleMovements = possibleMovements.concat(bishopMoves(table, row, col, color))
+                    temp = bishopMoves(table, row, col, color)
                     break;
 
                 case whitePieces[3]://Horse
-                    possibleMovements = possibleMovements.concat(horseMoves(table, row, col, color))
+                    temp = horseMoves(table, row, col, color)
                     break;
 
                 case whitePieces[4]://Queen
-                    possibleMovements = possibleMovements.concat(queenMoves(table, row, col, color))
+                    temp = queenMoves(table, row, col, color)
                     break;
 
                 case whitePieces[5]://King
-                    possibleMovements = possibleMovements.concat(kingMoves(table, row, col, color))
+                    temp = kingMoves(table, row, col, color)
                     break;
 
                 default:
                     break;
             }
+            possibleMovements = possibleMovements.concat(temp)
         }
     }
     return possibleMovements
