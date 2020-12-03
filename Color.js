@@ -1,11 +1,11 @@
 const { max, min } = require("./enums/limitsBoard")
 const { whitePieces, blackPieces } = require("./enums/pieces");
-const { pawnMovesBlack, pawnMovesWhite } = require("./strategies_pieces/pawnMoves");
-const { rookMoves } = require("./strategies_pieces/rookMoves");
-const { bishopMoves } = require("./strategies_pieces/bishopMoves");
-const { kingMoves } = require("./strategies_pieces/kingMoves")
-const { queenMoves } = require("./strategies_pieces/queenMoves")
-const { horseMoves } = require("./strategies_pieces/horseMoves");
+const { pawnMovesBlack, pawnMovesWhite } = require("./piecesMoves/pawnMoves");
+const { rookMoves } = require("./piecesMoves/rookMoves");
+const { bishopMoves } = require("./piecesMoves/bishopMoves");
+const { kingMoves } = require("./piecesMoves/kingMoves")
+const { queenMoves } = require("./piecesMoves/queenMoves")
+const { horseMoves } = require("./piecesMoves/horseMoves");
 
 
 function moveColor(board, colour) {
