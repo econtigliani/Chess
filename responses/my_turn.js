@@ -1,5 +1,5 @@
 
-var moveColor = require('../strategies_colours/Color').moveColor;
+var moveColor = require('../Color').moveColor;
 function move(data) {
 
     let result = moveColor(data.board, data.actual_turn)
