@@ -1,5 +1,5 @@
+const { moveColor } = require("../src/moveColor");
 
-var moveColor = require('../Color').moveColor;
 function move(data) {
 
     let result = moveColor(data.board, data.actual_turn)
