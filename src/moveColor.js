@@ -3,27 +3,30 @@ const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
 const {moveTable} = require("./util/moveTable");
 
-function moveColor(board, colour/* , table = null */) {
+function moveColor(board, colour , table = null ) {
 
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
     let possibleMovements = []
 
     //genero una matriz 
-
-/*     let possibleTable
-    let bestMoveCounter */
+    
+    let possibleTable
+    let bestMoveCounter 
     
     if(board != null){
     table = maketable(board)
     }
+
     if (colour == 'white') {
         possibleMovements = moveWhite(table)
-    /*     possibleMovements.forEach(pm => {
+        possibleTable=[]
+        bestMoveCounter = 0
+         possibleMovements.forEach(pm => {
             possibleTable = moveTable(table,pm)
-            bestMoveCounter = moveColor(board,'black')
+            bestMoveCounter = moveColor(null,'black',possibleTable)
             pm.value = pm.value - bestMoveCounter.value 
-        });*/
+        });
     } else {
         possibleMovements = moveBlack(table)
       /*   possibleMovements.forEach(pm => {
