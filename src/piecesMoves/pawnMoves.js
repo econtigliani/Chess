@@ -38,7 +38,7 @@ function pawnMovesWhite(table,row,col){
     if(table[row - 1][col] == ' ') {
         possibleMovements.push({
             num: 3,
-            value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((row - 9) * 10)),
+            value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((row - 8) * 10)),
             from_row: row,
             from_col: col,
             to_col: col,
@@ -102,7 +102,7 @@ function pawnMovesBlack(table, row, col) {
     // Move 1 place
     if ((table[row + 1][col] == ' ')) {
         possibleMovements.push({
-            value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((7-row-1) * 10)),
+            value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((7-row) * 10)),
             from_row: row,
             from_col: col,
             to_col: col,
