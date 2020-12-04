@@ -15,9 +15,12 @@ function rookMoves(table,row,col, turnColor){
     }
 
     let possibleMovements = [];
-    //Row - Moves
-   //Eat row
-   dance:
+    
+    // Imagine the board with the black pieces behind
+
+    /* Row - Moves */
+   
+    //Eat row up
    for (let i = (row + 1); i < max; i++) {
        if (turnPieces.includes(table[i][col])) {
            if (table[i - 1][col] == ' ') {
@@ -30,7 +33,7 @@ function rookMoves(table,row,col, turnColor){
                    to_row: i - 1,
                })
            }
-           break dance;
+           break 
        }
        if (counterPieces.includes(table[i][col])) {
            possibleMovements.push({
@@ -41,12 +44,12 @@ function rookMoves(table,row,col, turnColor){
                to_col: col,
                to_row: i,
            })
-           break dance;
+           break 
        }
    }
-   //Eat row behind
-   dance:
-   for (let i = (row - 1); i > min; i--) {
+
+   //Eat row down
+   for (let i = (row - 1); i >= min; i--) {
        if (turnPieces.includes(table[i][col])) {
            if (table[i + 1][col] == ' ') {
                possibleMovements.push({
@@ -58,7 +61,7 @@ function rookMoves(table,row,col, turnColor){
                    to_row: i + 1,
                })
            }
-           break dance;
+           break 
        }
        if (counterPieces.includes(table[i][col])) {
            possibleMovements.push({
@@ -69,15 +72,14 @@ function rookMoves(table,row,col, turnColor){
                to_col: col,
                to_row: i,
            })
-           break dance;
+           break 
        }
    }
 
-   //Col - Moves
-   //Eat col right
-   dance:
-   for (let i = (col + 1); i < max; i++) {
+   /* Col - Moves */
 
+   //Eat col right
+   for (let i = (col + 1); i < max; i++) {
        if (turnPieces.includes(table[row][i])) {
            if (table[row][i - 1] == ' ') {
                possibleMovements.push({
@@ -85,11 +87,11 @@ function rookMoves(table,row,col, turnColor){
                    value: valuePieces.Rook,
                    from_row: row,
                    from_col: col,
-                   to_col: i - 1,
+                   to_col: (i - 1),
                    to_row: row,
                })
            }
-           break dance;
+           break 
        }
        if (counterPieces.includes(table[row][i])) {
            possibleMovements.push({
@@ -100,12 +102,12 @@ function rookMoves(table,row,col, turnColor){
                to_col: i,
                to_row: row,
            })
-           break dance;
+           break 
        }
    }
-   //Eat col left
 
-   for (let i = (col - 1); i > min; i--) {
+   //Eat col left
+   for (let i = (col - 1); i >= min; i--) {
        if (turnPieces.includes(table[row][i])) {
            if (table[row][i + 1] == ' ') {
                possibleMovements.push({

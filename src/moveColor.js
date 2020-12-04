@@ -35,7 +35,6 @@ function moveColor(board, colour) {
     index = possibleMovements.findIndex(s => s.value == maxValue);
 
     //console.log(possibleMovements)
-    console.table(table)
 
     let result;
     result = {

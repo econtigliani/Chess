@@ -5,7 +5,6 @@ const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
 
 function horseMoves(table, row, col, turnColor) {
-    
     if (turnColor == 'white') {
         turnPieces = whitePieces
         counterPieces = blackPieces
@@ -24,7 +23,7 @@ function horseMoves(table, row, col, turnColor) {
         let move_row = row + X[i]
         let move_col = col + Y[i]
         // Check if each possible move is valid or not 
-        if ((move_row >= max || move_row <= min) || (move_col >= max || move_col <= min)) {
+        if ((move_row >= max || move_row < min) || (move_col >= max || move_col < min )) {
             break dance;
         }
 

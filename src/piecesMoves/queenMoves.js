@@ -46,7 +46,7 @@ function queenMoves(table, row, col, turnColor) {
     }
     //Eat row behind
     dance:
-    for (let i = (row - 1); i > min; i--) {
+    for (let i = (row - 1); i >= min; i--) {
         if (turnPieces.includes(table[i][col])) {
             if (table[i + 1][col] == ' ') {
                 possibleMovements.push({
@@ -105,7 +105,7 @@ function queenMoves(table, row, col, turnColor) {
     }
     //Eat col left
 
-    for (let i = (col - 1); i > min; i--) {
+    for (let i = (col - 1); i >= min; i--) {
         if (turnPieces.includes(table[row][i])) {
             if (table[row][i + 1] == ' ') {
                 possibleMovements.push({
@@ -162,7 +162,7 @@ function queenMoves(table, row, col, turnColor) {
     }
 
     // comer diagonal izquierda arriba
-    for (let i = (row + 1), j = (col - 1); i < max && j > min; i++, j--) {
+    for (let i = (row + 1), j = (col - 1); i < max && j >= min; i++, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num:34,
@@ -189,7 +189,7 @@ function queenMoves(table, row, col, turnColor) {
         }
     }
     //eat diagonal izquierda abajo
-    for (let i = (row - 1), j = (col - 1); i > min && j > min; i--, j--) {
+    for (let i = (row - 1), j = (col - 1); i >= min && j >= min; i--, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
                 num:36,
@@ -217,7 +217,7 @@ function queenMoves(table, row, col, turnColor) {
     }
     //eat diagonal derecha abajo
     dance:
-    for (let i = (row - 1), j = (col + 1); i > min && j < max; i--, j++) {
+    for (let i = (row - 1), j = (col + 1); i >= min && j < max; i--, j++) {
         if (turnPieces.includes(table[i][j])) {
             if (table[i + 1][j - 1] == ' ') {
                 possibleMovements.push({

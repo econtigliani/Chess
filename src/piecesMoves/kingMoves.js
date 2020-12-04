@@ -25,7 +25,7 @@ function kingMoves(table, row, col, turnColor) {
         let move_col = col + Y[i]
 
         // Check if each possible move is valid or not 
-        if (move_row >= max || move_row <= min || move_col >= max || move_col <= min) {
+        if (move_row >= max || move_row < min || move_col >= max || move_col < min) {
             break
         }
 
