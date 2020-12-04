@@ -1,7 +1,7 @@
 const { max, min } = require("./enums/limitsBoard")
 const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
-
+const { maketable } = require("./util/makeTable");
 
 
 function moveColor(board, colour) {
@@ -50,24 +50,6 @@ function moveColor(board, colour) {
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
     console.log("result: ", result)
     return result;
-}
-
-
-//read board
-function maketable(board) {
-
-    let index = 0;
-    let matrix = [];
-
-    for (let i = min; i < max; i++) {
-        let row = [];
-        for (let j = min; j < max; j++) {
-            row.push(board[index]);
-            index++;
-        }
-        matrix.push(row)
-    }
-    return matrix;
 }
 
 module.exports.moveColor = moveColor;
