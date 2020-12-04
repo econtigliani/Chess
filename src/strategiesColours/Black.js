@@ -11,6 +11,7 @@ const { max, min } = require("../enums/limitsBoard")
 function moveBlack(table) {
     const color = 'black'
     let possibleMovements = []
+    let temp = []
     //itero sobre toda la table buscando mis piezas
     for (let col = min; col < max; col++) {
         for (let row = min; row < max; row++) {
