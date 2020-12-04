@@ -1,39 +1,55 @@
 const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
-const {moveTable} = require("./util/moveTable");
+const { moveTable } = require("./util/moveTable");
 
-function moveColor(board, colour , table = null ) {
-
+function moveColor(board, colour, table = null, profundidad = 0) {
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
     let possibleMovements = []
-
+    let result;
     //genero una matriz 
-    
+
     let possibleTable
-    let bestMoveCounter 
-    
-    if(board != null){
-    table = maketable(board)
+    let bestMoveCounter
+
+    if (board != null) {
+        table = maketable(board)
     }
 
     if (colour == 'white') {
         possibleMovements = moveWhite(table)
-        possibleTable=[]
-        bestMoveCounter = 0
-         possibleMovements.forEach(pm => {
-            possibleTable = moveTable(table,pm)
-            bestMoveCounter = moveColor(null,'black',possibleTable)
-            pm.value = pm.value - bestMoveCounter.value 
-        });
+        if (profundidad = 0) {
+            possibleTable = []
+            bestMoveCounter = 0
+            possibleMovements.forEach(pm => {
+                possibleTable = moveTable(table, pm)
+                bestMoveCounter = moveColor(null, 'black', possibleTable, profundidad + 1)
+                pm.value = pm.value * 2 - bestMoveCounter.value
+                pm.push(possibleTableBlack= move(table,bestMoveCounter))
+            });
+            possibleMovements.forEach(pm => {
+                possibleTable = moveTable(table, pm)
+                bestMoveAfter = moveColor(null, 'white', pm.possibleTableBlack, profundidad + 1)
+                pm.value += bestMoveAfter.value
+            });
+        }
     } else {
         possibleMovements = moveBlack(table)
-      /*   possibleMovements.forEach(pm => {
-            possibleTable = moveTable(table,pm)
-            bestMoveCounter = moveColor(board,'white')
-            pm.value = pm.value - bestMoveCounter.value
-        }) */
+         if (profundidad = 0) {
+            possibleTable = []
+            bestMoveCounter = 0
+            possibleMovements.forEach(pm => {
+                possibleTable = moveTable(table, pm)
+                bestMoveCounter = moveColor(null, 'white', possibleTable, profundidad + 1)
+                pm.value = pm.value * 2 - bestMoveCounter.value
+                pm.push(possibleTableBlack= move(table,bestMoveCounter))
+            });
+            possibleMovements.forEach(pm => {
+                bestMoveAfter = moveColor(null, 'black',pm.possibleTableBlack, profundidad + 1)
+                pm.value += bestMoveAfter.value
+            });
+        } 
     }
 
 
@@ -53,7 +69,7 @@ function moveColor(board, colour , table = null ) {
 
     //console.table(table)
 
-    let result;
+
     result = {
         //num: possibleMovements[index].num,
         value: possibleMovements[index].value,
