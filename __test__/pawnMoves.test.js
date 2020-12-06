@@ -12,7 +12,7 @@ describe('pawnMoves test', () => {
                 to_col: 0,
             },
             {
-                value: 100,
+                value: 90,
                 from_row: 3,
                 from_col: 0,
                 to_row: 4,
@@ -33,7 +33,7 @@ describe('pawnMoves test', () => {
                 to_col: 0,
             },
             {
-                value: 90,
+                value: 80,
                 from_row: 2,
                 from_col: 0,
                 to_row: 3,
@@ -46,7 +46,7 @@ describe('pawnMoves test', () => {
         expect(pawnMovesBlack(tablesPawn.blockMove , 3, 0)).toStrictEqual([
             
             {
-                value: 100,
+                value: 90,
                 from_row: 3,
                 from_col: 0,
                 to_row: 4,
@@ -97,7 +97,7 @@ describe('pawnMovesWhite test', () => {
             },
             {
                 num: 3,
-                value: 100,
+                value: 90,
                 from_row: 12,
                 from_col: 0,
                 to_row: 11,
@@ -120,7 +120,7 @@ describe('pawnMovesWhite test', () => {
             },
             {
                 num: 3,
-                value: 90,
+                value: 80,
                 from_row: 13,
                 from_col: 0,
                 to_row: 12,
@@ -135,7 +135,7 @@ describe('pawnMovesWhite test', () => {
             
             {
                 num: 3,
-                value: 100,
+                value: 90,
                 from_row: 12,
                 from_col: 0,
                 to_row: 11,
