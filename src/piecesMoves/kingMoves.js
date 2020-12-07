@@ -32,7 +32,7 @@ function kingMoves(table, row, col, turnColor) {
         if ((table[move_row][move_col] == ' ')) {
             possibleMovements.push({
                 num:40,
-                value: valuePieces.King,
+                value: valuePieces.King -10,
                 from_row: row,
                 from_col: col,
                 to_col: move_col,

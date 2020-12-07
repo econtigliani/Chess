@@ -23,7 +23,7 @@ function queenMoves(table, row, col, turnColor) {
             if (table[i - 1][col] == ' ') {
                 possibleMovements.push({
                     num:24,
-                    value: valuePieces.Queen,
+                    value: valuePieces.Queen-10,
                     from_row: row,
                     from_col: col,
                     to_col: col,

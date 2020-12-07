@@ -19,14 +19,14 @@ function moveColor(board, colour, table = null, profundidad = 0) {
 
     if (colour == 'white') {
         possibleMovements = moveWhite(table)
-        if (profundidad = 0) {
+        if (profundidad == 0) {
             possibleTable = []
             bestMoveCounter = 0
             possibleMovements.forEach(pm => {
                 possibleTable = moveTable(table, pm)
                 bestMoveCounter = moveColor(null, 'black', possibleTable, profundidad + 1)
-                pm.value = pm.value * 2 - bestMoveCounter.value
-                pm.push(possibleTableBlack= move(table,bestMoveCounter))
+                pm.value = pm.value  - bestMoveCounter.value
+                pm.possibleTableBlack= moveTable(table,bestMoveCounter)
             });
             possibleMovements.forEach(pm => {
                 possibleTable = moveTable(table, pm)
@@ -36,24 +36,25 @@ function moveColor(board, colour, table = null, profundidad = 0) {
         }
     } else {
         possibleMovements = moveBlack(table)
-         if (profundidad = 0) {
+         if (profundidad == 0) {
             possibleTable = []
             bestMoveCounter = 0
             possibleMovements.forEach(pm => {
                 possibleTable = moveTable(table, pm)
                 bestMoveCounter = moveColor(null, 'white', possibleTable, profundidad + 1)
-                pm.value = pm.value * 2 - bestMoveCounter.value
-                pm.push(possibleTableBlack= move(table,bestMoveCounter))
+                pm.value = pm.value - bestMoveCounter.value
+                pm.possibleTableBlack= moveTable(table,bestMoveCounter)
             });
             possibleMovements.forEach(pm => {
                 bestMoveAfter = moveColor(null, 'black',pm.possibleTableBlack, profundidad + 1)
                 pm.value += bestMoveAfter.value
             });
         } 
+        
     }
 
 
-    //console.log(possibleMovements)
+
     // busco cual de los resultados es el que tiene el mayor valor.
     let maxValue = -999999999999;
 
@@ -81,7 +82,7 @@ function moveColor(board, colour, table = null, profundidad = 0) {
 
 
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
-    //console.log("result: ", result)
+    console.log("result: ", result)
     return result;
 }
 
