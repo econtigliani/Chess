@@ -2,7 +2,7 @@ const { moveColor } = require("../src/moveColor");
 
 function move(data) {
 
-    let result = moveColor(data.board, data.actual_turn)
+    let result = moveColor(data.board, data.actual_turn,0)
 
     return (JSON.stringify({
         action: 'move',

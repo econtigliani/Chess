@@ -8,6 +8,8 @@ const { max, min } = require("../enums/limitsBoard")
 
 
 function pawnMovesWhite(table, row, col) {
+
+    
     let possibleMovements = []
     // Move 2 places in the first movement.
     if ((row == 13) && (table[row - 1][col] == ' ') && (table[row - 2][col] == ' ')) {
@@ -38,8 +40,8 @@ function pawnMovesWhite(table, row, col) {
         )
     }
     // Move 1 place
-    console.log(row-1, col)
-    console.table(table)
+   /*  console.log(row-1, col)
+    console.table(table) */
     if (table[row - 1][col] == ' ') {
         possibleMovements.push({
             num: 3,

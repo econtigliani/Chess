@@ -45,6 +45,7 @@ ws.on('connect', function (connection) {
 
                 //envio el movimiento que realizo
                 console.log(data.data);
+                //console.table(data.table)
                 connection.sendUTF(My_Turn.move(data.data));
                 break;
 

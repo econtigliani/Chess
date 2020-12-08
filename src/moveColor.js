@@ -3,16 +3,20 @@ const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
 
-function moveColor(board, colour, table = null, profundidad = 0) {
+function moveColor(board, colour, profundidad, table) {
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
+    
     let possibleMovements = []
     let result;
+    let possibleTable = []
+    let possibleMovements = []
+    let bestMoveAfter = null
+    let bestMoveCounter = null
+
+
+
     //genero una matriz 
-
-    let possibleTable
-    let bestMoveCounter
-
     if (board != null) {
         table = maketable(board)
     }
@@ -20,37 +24,39 @@ function moveColor(board, colour, table = null, profundidad = 0) {
     if (colour == 'white') {
         possibleMovements = moveWhite(table)
         if (profundidad == 0) {
-            possibleTable = []
             bestMoveCounter = 0
+
             possibleMovements.forEach(pm => {
-                possibleTable = moveTable(table, pm)
-                bestMoveCounter = moveColor(null, 'black', possibleTable, profundidad + 1)
-                pm.value = pm.value  - bestMoveCounter.value
-                pm.possibleTableBlack= moveTable(table,bestMoveCounter)
-            });
-            possibleMovements.forEach(pm => {
-                possibleTable = moveTable(table, pm)
-                bestMoveAfter = moveColor(null, 'white', pm.possibleTableBlack, profundidad + 1)
-                pm.value += bestMoveAfter.value
+            
+                possibleTable = []
+                possibleTableCounter = []
+            
+                possibleTable = moveTable(table2, pm)
+                bestMoveCounter = moveColor(null, 'black', 1, possibleTable)
+
+                possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
+                bestMoveAfter = moveColor(null, 'white', 1, possibleTableCounter)
+
+                pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value
             });
         }
     } else {
         possibleMovements = moveBlack(table)
-         if (profundidad == 0) {
-            possibleTable = []
+        if (profundidad == 0) {
             bestMoveCounter = 0
+
             possibleMovements.forEach(pm => {
-                possibleTable = moveTable(table, pm)
-                bestMoveCounter = moveColor(null, 'white', possibleTable, profundidad + 1)
-                pm.value = pm.value - bestMoveCounter.value
-                pm.possibleTableBlack= moveTable(table,bestMoveCounter)
+
+                possibleTable = moveTable(table2, pm)
+                bestMoveCounter = moveColor(null, 'white', 1, possibleTable)
+
+                possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
+                bestMoveAfter = moveColor(null, 'black', 1, possibleTableCounter)
+
+                pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value
             });
-            possibleMovements.forEach(pm => {
-                bestMoveAfter = moveColor(null, 'black',pm.possibleTableBlack, profundidad + 1)
-                pm.value += bestMoveAfter.value
-            });
-        } 
-        
+        }
+
     }
 
 
@@ -70,7 +76,6 @@ function moveColor(board, colour, table = null, profundidad = 0) {
 
     //console.table(table)
 
-
     result = {
         //num: possibleMovements[index].num,
         value: possibleMovements[index].value,
@@ -82,7 +87,7 @@ function moveColor(board, colour, table = null, profundidad = 0) {
 
 
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
-    console.log("result: ", result)
+    //console.log("result: ", result)
     return result;
 }
 
