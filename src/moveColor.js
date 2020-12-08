@@ -9,12 +9,10 @@ function moveColor(board, colour, profundidad, table) {
     
     let possibleMovements = []
     let result;
+
     let possibleTable = []
-    let possibleMovements = []
     let bestMoveAfter = null
     let bestMoveCounter = null
-
-
 
     //genero una matriz 
     if (board != null) {
@@ -31,7 +29,7 @@ function moveColor(board, colour, profundidad, table) {
                 possibleTable = []
                 possibleTableCounter = []
             
-                possibleTable = moveTable(table2, pm)
+                possibleTable = moveTable(table, pm)
                 bestMoveCounter = moveColor(null, 'black', 1, possibleTable)
 
                 possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
@@ -47,7 +45,7 @@ function moveColor(board, colour, profundidad, table) {
 
             possibleMovements.forEach(pm => {
 
-                possibleTable = moveTable(table2, pm)
+                possibleTable = moveTable(table, pm)
                 bestMoveCounter = moveColor(null, 'white', 1, possibleTable)
 
                 possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
