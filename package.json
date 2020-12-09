@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node webSocket.js"
+    "start": "node webSocket.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jest": "^26.6.3",
     "websocket": "^1.0.32",
     "ws": "^7.4.0"
   }

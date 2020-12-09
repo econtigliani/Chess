@@ -1,0 +1,1 @@
+Falta poder leer las piezas sin separarlas en white y black y listo.
