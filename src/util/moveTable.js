@@ -2,7 +2,7 @@ const { whitePieces, blackPieces } = require("../enums/pieces")
 
 function moveTable(table,move) {
     const temp = table[move.from_row][move.from_col]
-    newtable = table
+    let newtable = table
     // Promote
     if(temp == whitePieces[0] && move.to_row == 8){
         newtable[move.to_row][move.to_col] = whitePieces[4]

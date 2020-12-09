@@ -31,7 +31,7 @@ function pawnMovesWhite(table, row, col) {
         possibleMovements.push(
             {
                 num: 2,
-                value: valuePieces.Pawn * weightPieces.firstRowPawn + (-0.01*(col - 7) ^ (2)),
+                value: valuePieces.Pawn * weightPieces.firstRowPawn,
                 from_row: row,
                 from_col: col,
                 to_row: (row - 2),
@@ -40,12 +40,23 @@ function pawnMovesWhite(table, row, col) {
         )
     }
     // Move 1 place
-   /*  console.log(row-1, col)
-    console.table(table) */
+
     if (table[row - 1][col] == ' ') {
         possibleMovements.push({
             num: 3,
-            value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((row - 8 - 1) * 10)) + (-0.01*(col - 7) ^ (2)),
+            value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((row - 8 - 1) * 10)),
+            from_row: row,
+            from_col: col,
+            to_col: col,
+            to_row: (row - 1),
+        })
+    } 
+    
+    //Promote
+    if ((table[row - 1][col] == ' ') && row == 9) {
+        possibleMovements.push({
+            num: 300,
+            value: 500,
             from_row: row,
             from_col: col,
             to_col: col,
@@ -110,6 +121,17 @@ function pawnMovesBlack(table, row, col) {
     if ((table[row + 1][col] == ' ')) {
         possibleMovements.push({
             value: ((valuePieces.Pawn) * weightPieces.movingFowardPawn - ((7 - row - 1) * 10)),
+            from_row: row,
+            from_col: col,
+            to_col: col,
+            to_row: (row + 1),
+        })
+    }
+
+    //promote
+    if ((table[row + 1][col] == ' ') && row == 6) {
+        possibleMovements.push({
+            value: 500,
             from_row: row,
             from_col: col,
             to_col: col,

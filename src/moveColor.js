@@ -6,7 +6,7 @@ const { moveTable } = require("./util/moveTable");
 function moveColor(board, colour, profundidad, table) {
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
-    
+
     let possibleMovements = []
     let result;
 
@@ -25,39 +25,45 @@ function moveColor(board, colour, profundidad, table) {
             bestMoveCounter = 0
 
             possibleMovements.forEach(pm => {
-            
+
                 possibleTable = []
                 possibleTableCounter = []
-            
+
+                table = maketable(board)
+
                 possibleTable = moveTable(table, pm)
                 bestMoveCounter = moveColor(null, 'black', 1, possibleTable)
 
                 possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
                 bestMoveAfter = moveColor(null, 'white', 1, possibleTableCounter)
 
-                pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value
+                possibleTable2 = moveTable(possibleTableCounter,bestMoveAfter)
+                bestMoveCounter2 = moveColor(null, 'black', 1, possibleTable2)
+
+                pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value 
             });
         }
-    } else {
-        possibleMovements = moveBlack(table)
-        if (profundidad == 0) {
-            bestMoveCounter = 0
+    } else 
+    possibleMovements = moveBlack(table)
+    if (profundidad == 0) {
+        bestMoveCounter = 0
 
-            possibleMovements.forEach(pm => {
+        possibleMovements.forEach(pm => {
 
-                possibleTable = moveTable(table, pm)
-                bestMoveCounter = moveColor(null, 'white', 1, possibleTable)
+            possibleTable = []
+            possibleTableCounter = []
 
-                possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
-                bestMoveAfter = moveColor(null, 'black', 1, possibleTableCounter)
+            table = maketable(board)
 
-                pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value
-            });
-        }
+            possibleTable = moveTable(table, pm)
+            bestMoveCounter = moveColor(null, 'white', 1, possibleTable)
 
+            possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
+            bestMoveAfter = moveColor(null, 'black', 1, possibleTableCounter)
+
+            pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value 
+        });
     }
-
-
 
     // busco cual de los resultados es el que tiene el mayor valor.
     let maxValue = -999999999999;
