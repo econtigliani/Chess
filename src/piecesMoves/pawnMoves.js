@@ -8,7 +8,6 @@ const { max, min } = require("../enums/limitsBoard")
 
 
 function pawnMovesWhite(table, row, col) {
-
     
     let possibleMovements = []
     // Move 2 places in the first movement.
@@ -17,7 +16,7 @@ function pawnMovesWhite(table, row, col) {
         possibleMovements.push(
             {
                 num: 1,
-                value: valuePieces.Pawn * weightPieces.secondRowPawn + (-0.1*(col - 7) ^ (2)),
+                value: valuePieces.Pawn * weightPieces.secondRowPawn,
                 from_row: row,
                 from_col: col,
                 to_row: (row - 2),
