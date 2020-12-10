@@ -2,13 +2,12 @@ const { blackPieces, whitePieces } = require("../enums/pieces")
 const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
-const { max, min } = require("../enums/limitsBoard")
 
 
 
 
 function pawnMovesWhite(table, row, col) {
-    
+
     let possibleMovements = []
     // Move 2 places in the first movement.
     if ((row == 13) && (table[row - 1][col] == ' ') && (table[row - 2][col] == ' ')) {
@@ -49,8 +48,8 @@ function pawnMovesWhite(table, row, col) {
             to_col: col,
             to_row: (row - 1),
         })
-    } 
-    
+    }
+
     //Promote
     if ((table[row - 1][col] == ' ') && row == 9) {
         possibleMovements.push({

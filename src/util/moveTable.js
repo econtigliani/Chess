@@ -4,7 +4,8 @@ function moveTable(table,move) { // Capaz vale la pena cambiar el nombre para qu
     
     let newtable= table.map(function(arr) {
         return arr.slice();
-    });
+    }); 
+    
     const temp = newtable[move.from_row][move.from_col]
 
     // Promote
@@ -17,6 +18,7 @@ function moveTable(table,move) { // Capaz vale la pena cambiar el nombre para qu
     }
 
     newtable[move.from_row][move.from_col] = ' '
+
     return newtable
 
 }

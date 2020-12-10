@@ -3,10 +3,11 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
+const { white } = require("../enums/colours")
 
 function queenMoves(table, row, col, turnColor) {
        
-    if (turnColor == 'white') {
+    if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {
@@ -23,7 +24,7 @@ function queenMoves(table, row, col, turnColor) {
             if (table[i - 1][col] == ' ') {
                 possibleMovements.push({
                     num:24,
-                    value: valuePieces.Queen-10,
+                    value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
                     to_col: col,

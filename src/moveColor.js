@@ -1,8 +1,11 @@
+const { black, white } = require("./enums/colours");
 const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
-const MAXDEPTH = 3
+
+
+const MAXDEPTH = 2
 
 function moveColor(board, colour, profundidad = MAXDEPTH) {
 
@@ -13,6 +16,9 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
 
     let possibleMovements = []
     let result;
+    let bestMoveCounter
+    let possibleTable
+    let possibleTableCounter
 
 
     //genero una matriz 
@@ -20,7 +26,7 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
         board = maketable(board)
     }
 
-    if (colour == 'white') {
+    if (colour == white) {
         possibleMovements = moveWhite(board)
         if (profundidad > 0 ) {
             bestMoveCounter = 0
@@ -33,7 +39,7 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
     
                 possibleTable = moveTable(board, pm)
                 bestMoveCounter = 0
-                bestMoveCounter = moveColor(possibleTable, 'black', profundidad - 1).value
+                bestMoveCounter = moveColor(possibleTable, black, profundidad - 1).value
                     
                 pm.value = profundidad * pm.value - bestMoveCounter
 
@@ -51,7 +57,7 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
             possibleTableCounter = []
             bestMoveCounter = 0
             possibleTable = moveTable(board, pm)
-            bestMoveCounter =moveColor(possibleTable, 'white', profundidad - 1).value
+            bestMoveCounter =moveColor(possibleTable, white, profundidad - 1).value
 
             pm.value = profundidad * pm.value - bestMoveCounter
         });

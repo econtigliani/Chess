@@ -2,7 +2,7 @@
   "name": "chess",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "--max-old-space-size=8192 dist/index.js",
   "scripts": {
     "start": "node webSocket.js",
     "test": "jest",
