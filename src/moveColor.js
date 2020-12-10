@@ -2,11 +2,11 @@ const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
-const deph = 3
+const MAXDEPTH = 3
 
-function moveColor(board, colour, profundidad) {
+function moveColor(board, colour, profundidad = MAXDEPTH) {
 
-    if (profundidad == deph){
+    if (profundidad == 0){
         return {value : 0}
     }
     //vacio el arreglo porque tiene movimientos de la jugada anterior
@@ -14,46 +14,46 @@ function moveColor(board, colour, profundidad) {
     let possibleMovements = []
     let result;
 
-    let possibleTable = []
-    let bestMoveAfter = null
-    let bestMoveCounter = null
 
     //genero una matriz 
-    if (profundidad == 0) {
-        table = maketable(board)
+    if (profundidad == MAXDEPTH) {
+        board = maketable(board)
     }
 
     if (colour == 'white') {
-        possibleMovements = moveWhite(table)
-        if (profundidad == 0) {
+        possibleMovements = moveWhite(board)
+        if (profundidad > 0 ) {
             bestMoveCounter = 0
 
             possibleMovements.forEach(pm => {
-
+                
                 possibleTable = []
                 possibleTableCounter = []
+                bestMoveCounter = 0
+    
+                possibleTable = moveTable(board, pm)
+                bestMoveCounter = 0
+                bestMoveCounter = moveColor(possibleTable, 'black', profundidad - 1).value
+                    
+                pm.value = profundidad * pm.value - bestMoveCounter
 
-                table = maketable(board)
-
-                possibleTable = moveTable(table, pm)
-                bestMoveCounter = moveColor(null, 'black', profundidad + 1, possibleTable).value
-                
+               
             });
         }
     } else 
-    possibleMovements = moveBlack(table)
-    if (profundidad == 0) {
+    possibleMovements = moveBlack(board)
+    if (profundidad > 0) {
         bestMoveCounter = 0
 
         possibleMovements.forEach(pm => {
 
             possibleTable = []
             possibleTableCounter = []
+            bestMoveCounter = 0
+            possibleTable = moveTable(board, pm)
+            bestMoveCounter =moveColor(possibleTable, 'white', profundidad - 1).value
 
-            table = maketable(board)
-
-            possibleTable = moveTable(table, pm)
-            bestMoveCounter = moveColor(null, 'white', profundidad + 1, possibleTable).value
+            pm.value = profundidad * pm.value - bestMoveCounter
         });
     }
 
