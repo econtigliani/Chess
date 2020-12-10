@@ -2,9 +2,13 @@ const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
+const deph = 3
 
-function moveColor(board, colour, profundidad, table) {
+function moveColor(board, colour, profundidad) {
 
+    if (profundidad == deph){
+        return {value : 0}
+    }
     //vacio el arreglo porque tiene movimientos de la jugada anterior
 
     let possibleMovements = []
@@ -15,7 +19,7 @@ function moveColor(board, colour, profundidad, table) {
     let bestMoveCounter = null
 
     //genero una matriz 
-    if (board != null) {
+    if (profundidad == 0) {
         table = maketable(board)
     }
 
@@ -32,15 +36,8 @@ function moveColor(board, colour, profundidad, table) {
                 table = maketable(board)
 
                 possibleTable = moveTable(table, pm)
-                bestMoveCounter = moveColor(null, 'black', 1, possibleTable)
-
-                possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
-                bestMoveAfter = moveColor(null, 'white', 1, possibleTableCounter)
-
-                possibleTable2 = moveTable(possibleTableCounter,bestMoveAfter)
-                bestMoveCounter2 = moveColor(null, 'black', 1, possibleTable2)
-
-                pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value 
+                bestMoveCounter = moveColor(null, 'black', profundidad + 1, possibleTable).value
+                
             });
         }
     } else 
@@ -56,12 +53,7 @@ function moveColor(board, colour, profundidad, table) {
             table = maketable(board)
 
             possibleTable = moveTable(table, pm)
-            bestMoveCounter = moveColor(null, 'white', 1, possibleTable)
-
-            possibleTableCounter = moveTable(possibleTable, bestMoveCounter)
-            bestMoveAfter = moveColor(null, 'black', 1, possibleTableCounter)
-
-            pm.value = pm.value * 2 - bestMoveCounter.value + bestMoveAfter.value 
+            bestMoveCounter = moveColor(null, 'white', profundidad + 1, possibleTable).value
         });
     }
 
