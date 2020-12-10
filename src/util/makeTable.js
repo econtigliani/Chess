@@ -6,9 +6,9 @@ function maketable(board) {
     let index = 0;
     let matrix = [];
 
-    for (let i = max -1; i >= min; i--) {
+    for (let i = 0; i < max; i++) {
         let row = [];
-        for (let j = max-1; j >= min; j--) {
+        for (let j = 0; j < max; j++) {
             row.push(board[index]);
             index++;
         }
@@ -16,23 +16,6 @@ function maketable(board) {
     }
     return matrix;
 }
-
-//read table
-function makeboard(table) {
-
-    var newArr = [];
-    
-    
-    for(var i = 0; i < table.length; i++)
-    {
-        newArr = newArr.concat(table[i]);
-    }
-    
-    return newArr.join('')
-}
-
-
 module.exports = {
-    makeboard : makeboard,
     maketable : maketable,
 }
