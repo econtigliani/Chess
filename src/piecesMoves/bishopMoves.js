@@ -4,23 +4,24 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
+const white = 'white'
 
-function bishopMoves(table,row,col,turnColor){
-    
-    if (turnColor == 'white') {
+function bishopMoves(table, row, col, turnColor) {
+
+    if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {
         turnPieces = blackPieces
         counterPieces = whitePieces
     }
-    
+
     let possibleMovements = [];
     for (let i = (row + 1), j = (col + 1); i < max && j < max; i++, j++) {
 
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
-                num:14,
+                num: 14,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -103,7 +104,7 @@ function bishopMoves(table,row,col,turnColor){
         if (counterPieces.includes(table[i][j])) {
 
             possibleMovements.push({
-                num:20,
+                num: 20,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -115,7 +116,7 @@ function bishopMoves(table,row,col,turnColor){
         if (turnPieces.includes(table[i][j])) {
             if (table[i + 1][j - 1] == ' ') {
                 possibleMovements.push({
-                    num:21,
+                    num: 21,
                     value: valuePieces.Bishop,
                     from_row: row,
                     from_col: col,

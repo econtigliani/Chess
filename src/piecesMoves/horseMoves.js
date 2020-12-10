@@ -3,9 +3,10 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
+const white = 'white'
 
 function horseMoves(table, row, col, turnColor) {
-    if (turnColor == 'white') {
+    if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {
@@ -23,13 +24,13 @@ function horseMoves(table, row, col, turnColor) {
         let move_row = row + X[i]
         let move_col = col + Y[i]
         // Check if each possible move is valid or not 
-        if ((move_row >= max || move_row < min) || (move_col >= max || move_col < min )) {
+        if ((move_row >= max || move_row < min) || (move_col >= max || move_col < min)) {
             break dance;
         }
 
         if ((table[move_row][move_col] == ' ')) {
             possibleMovements.push({
-                num:22,
+                num: 22,
                 value: valuePieces.Horse,
                 from_row: row,
                 from_col: col,
@@ -39,7 +40,7 @@ function horseMoves(table, row, col, turnColor) {
         }
         if (counterPieces.includes(table[move_row][move_col])) {
             possibleMovements.push({
-                num:23,
+                num: 23,
                 value: ((valuePieces[letterToName[table[move_row][move_col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,

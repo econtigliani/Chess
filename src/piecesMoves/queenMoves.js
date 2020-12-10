@@ -3,10 +3,11 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
+const white = 'white'
 
 function queenMoves(table, row, col, turnColor) {
-       
-    if (turnColor == 'white') {
+
+    if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {
@@ -22,7 +23,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[i][col])) {
             if (table[i - 1][col] == ' ') {
                 possibleMovements.push({
-                    num:24,
+                    num: 24,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -34,7 +35,7 @@ function queenMoves(table, row, col, turnColor) {
         }
         if (counterPieces.includes(table[i][col])) {
             possibleMovements.push({
-                num:25,
+                num: 25,
                 value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -50,7 +51,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[i][col])) {
             if (table[i + 1][col] == ' ') {
                 possibleMovements.push({
-                    num:26,
+                    num: 26,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -62,7 +63,7 @@ function queenMoves(table, row, col, turnColor) {
         }
         if (counterPieces.includes(table[i][col])) {
             possibleMovements.push({
-                num:27,
+                num: 27,
                 value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -81,7 +82,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[row][i])) {
             if (table[row][i - 1] == ' ') {
                 possibleMovements.push({
-                    num:28,
+                    num: 28,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -93,7 +94,7 @@ function queenMoves(table, row, col, turnColor) {
         }
         if (counterPieces.includes(table[row][i])) {
             possibleMovements.push({
-                num:29,
+                num: 29,
                 value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -109,7 +110,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[row][i])) {
             if (table[row][i + 1] == ' ') {
                 possibleMovements.push({
-                    num:30,
+                    num: 30,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -121,7 +122,7 @@ function queenMoves(table, row, col, turnColor) {
         }
         if (counterPieces.includes(table[row][i])) {
             possibleMovements.push({
-                num:31,
+                num: 31,
                 value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -138,7 +139,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[i][j])) {
             if (table[i - 1][j - 1] == ' ') {
                 possibleMovements.push({
-                    num:32,
+                    num: 32,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -150,7 +151,7 @@ function queenMoves(table, row, col, turnColor) {
         }
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
-                num:33,
+                num: 33,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -165,7 +166,7 @@ function queenMoves(table, row, col, turnColor) {
     for (let i = (row + 1), j = (col - 1); i < max && j >= min; i++, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
-                num:34,
+                num: 34,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -177,7 +178,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[i][j])) {
             if (table[i - 1][j + 1] == ' ') {
                 possibleMovements.push({
-                    num:35,
+                    num: 35,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -192,7 +193,7 @@ function queenMoves(table, row, col, turnColor) {
     for (let i = (row - 1), j = (col - 1); i >= min && j >= min; i--, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
-                num:36,
+                num: 36,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
@@ -204,7 +205,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[i][col])) {
             if (table[i + 1][j + 1] == ' ') {
                 possibleMovements.push({
-                    num:37,
+                    num: 37,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -221,7 +222,7 @@ function queenMoves(table, row, col, turnColor) {
         if (turnPieces.includes(table[i][j])) {
             if (table[i + 1][j - 1] == ' ') {
                 possibleMovements.push({
-                    num:38,
+                    num: 38,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -234,7 +235,7 @@ function queenMoves(table, row, col, turnColor) {
         if (counterPieces.includes(table[i][j])) {
 
             possibleMovements.push({
-                num:39,
+                num: 39,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
