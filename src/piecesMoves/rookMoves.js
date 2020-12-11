@@ -3,10 +3,11 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
+const white = 'white'
 
 function rookMoves(table,row,col, turnColor){
        
-    if (turnColor == 'white') {
+    if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {
@@ -20,7 +21,7 @@ function rookMoves(table,row,col, turnColor){
 
     /* Row - Moves */
    
-    //Eat row up
+    MovesUp:
    for (let i = (row + 1); i < max; i++) {
        if (turnPieces.includes(table[i][col])) {
            if (table[i - 1][col] == ' ') {
@@ -33,7 +34,7 @@ function rookMoves(table,row,col, turnColor){
                    to_row: i - 1,
                })
            }
-           break 
+           break MovesUp
        }
        if (counterPieces.includes(table[i][col])) {
            possibleMovements.push({
@@ -44,11 +45,11 @@ function rookMoves(table,row,col, turnColor){
                to_col: col,
                to_row: i,
            })
-           break 
+           break MovesUp
        }
    }
 
-   //Eat row down
+   MovesDown:
    for (let i = (row - 1); i >= min; i--) {
        if (turnPieces.includes(table[i][col])) {
            if (table[i + 1][col] == ' ') {
@@ -61,7 +62,7 @@ function rookMoves(table,row,col, turnColor){
                    to_row: i + 1,
                })
            }
-           break 
+           break MovesDown
        }
        if (counterPieces.includes(table[i][col])) {
            possibleMovements.push({
@@ -72,13 +73,13 @@ function rookMoves(table,row,col, turnColor){
                to_col: col,
                to_row: i,
            })
-           break 
+           break MovesDown
        }
    }
 
    /* Col - Moves */
 
-   //Eat col right
+   MovesRight:
    for (let i = (col + 1); i < max; i++) {
        if (turnPieces.includes(table[row][i])) {
            if (table[row][i - 1] == ' ') {
@@ -91,7 +92,7 @@ function rookMoves(table,row,col, turnColor){
                    to_row: row,
                })
            }
-           break 
+           break MovesRight
        }
        if (counterPieces.includes(table[row][i])) {
            possibleMovements.push({
@@ -102,11 +103,11 @@ function rookMoves(table,row,col, turnColor){
                to_col: i,
                to_row: row,
            })
-           break 
+           break MovesRight
        }
    }
 
-   //Eat col left
+   MovesLeft:
    for (let i = (col - 1); i >= min; i--) {
        if (turnPieces.includes(table[row][i])) {
            if (table[row][i + 1] == ' ') {
@@ -119,7 +120,7 @@ function rookMoves(table,row,col, turnColor){
                    to_row: row,
                })
            }
-           break
+           break MovesLeft
        }
        if (counterPieces.includes(table[row][i])) {
            possibleMovements.push({
@@ -130,7 +131,7 @@ function rookMoves(table,row,col, turnColor){
                to_col: i,
                to_row: row,
            })
-           break
+           break MovesLeft
        }
    }
    return possibleMovements

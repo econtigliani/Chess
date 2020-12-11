@@ -1,7 +1,7 @@
-const { max, min } = require("./enums/limitsBoard")
 const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
+const white = 'white'
 
 
 function moveColor(board, colour) {
@@ -14,7 +14,7 @@ function moveColor(board, colour) {
     let table
     table = maketable(board)
 
-    if (colour == 'white') {
+    if (colour == white) {
         possibleMovements = moveWhite(table)
     } else {
         possibleMovements = moveBlack(table)

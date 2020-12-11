@@ -1,7 +1,27 @@
 const { pawnMovesBlack, pawnMovesWhite } = require("../src/piecesMoves/pawnMoves");
-const { tablesPawn, tableInit } = require("./mockTables");
+const { tablesPawn, tableInit } = require("./mockTables/mockTables");
 
 describe('pawnMoves test', () => {
+    
+    test('Promote', () => {
+        expect(pawnMovesBlack(tablesPawn.Promote , 6, 0)).toStrictEqual([
+            {
+                value: 130,
+                from_row: 6,
+                from_col: 0,
+                to_row: 7,
+                to_col: 0,
+            },
+            {
+                value: 500,
+                from_row: 6,
+                from_col: 0,
+                to_row: 7,
+                to_col: 0,
+
+            }
+        ])
+    })
     test('first movement 2 places into 5 row', () => {
         expect(pawnMovesBlack(tableInit , 3, 0)).toStrictEqual([
             {
@@ -12,7 +32,7 @@ describe('pawnMoves test', () => {
                 to_col: 0,
             },
             {
-                value: 90,
+                value: 100,
                 from_row: 3,
                 from_col: 0,
                 to_row: 4,
@@ -33,7 +53,7 @@ describe('pawnMoves test', () => {
                 to_col: 0,
             },
             {
-                value: 80,
+                value: 90,
                 from_row: 2,
                 from_col: 0,
                 to_row: 3,
@@ -46,7 +66,7 @@ describe('pawnMoves test', () => {
         expect(pawnMovesBlack(tablesPawn.blockMove , 3, 0)).toStrictEqual([
             
             {
-                value: 90,
+                value: 100,
                 from_row: 3,
                 from_col: 0,
                 to_row: 4,
@@ -85,6 +105,29 @@ describe('pawnMoves test', () => {
 
 })
 describe('pawnMovesWhite test', () => {
+      
+    test('Promote', () => {
+        expect(pawnMovesWhite(tablesPawn.Promote , 9, 0)).toStrictEqual([
+            {
+                num: 3,
+                value: 130,
+                from_row: 9,
+                from_col: 0,
+                to_row: 8,
+                to_col: 0,
+            },
+            {
+                num:300,
+                value: 500,
+                from_row: 9,
+                from_col: 0,
+                to_row: 8,
+                to_col: 0,
+
+            }
+        ])
+    })
+
     test('first movement 2 places into 12 row', () => {
         expect(pawnMovesWhite(tableInit, 12, 0)).toStrictEqual([
             {
@@ -97,7 +140,7 @@ describe('pawnMovesWhite test', () => {
             },
             {
                 num: 3,
-                value: 90,
+                value: 100,
                 from_row: 12,
                 from_col: 0,
                 to_row: 11,
@@ -120,7 +163,7 @@ describe('pawnMovesWhite test', () => {
             },
             {
                 num: 3,
-                value: 80,
+                value: 90,
                 from_row: 13,
                 from_col: 0,
                 to_row: 12,
@@ -135,7 +178,7 @@ describe('pawnMovesWhite test', () => {
             
             {
                 num: 3,
-                value: 90,
+                value: 100,
                 from_row: 12,
                 from_col: 0,
                 to_row: 11,

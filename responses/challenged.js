@@ -1,9 +1,8 @@
-function challenged(data){
+function challenged(board_id){
     return(JSON.stringify({
         action: 'accept_challenge',
         data: {
-            username : 'Ema',
-            board_id : data.board_id
+            board_id : board_id
         }
     }))
 }

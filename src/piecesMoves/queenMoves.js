@@ -3,10 +3,11 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
+const white = 'white'
 
 function queenMoves(table, row, col, turnColor) {
-       
-    if (turnColor == 'white') {
+
+    if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {
@@ -16,13 +17,12 @@ function queenMoves(table, row, col, turnColor) {
 
     let possibleMovements = []
     //Row - Moves
-    //Eat row
-    dance:
+    MovesUp:
     for (let i = (row + 1); i < max; i++) {
         if (turnPieces.includes(table[i][col])) {
             if (table[i - 1][col] == ' ') {
                 possibleMovements.push({
-                    num:24,
+                    num: 24,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -30,27 +30,27 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: i - 1,
                 })
             }
-            break dance;
+            break MovesUp;
         }
         if (counterPieces.includes(table[i][col])) {
             possibleMovements.push({
-                num:25,
+                num: 25,
                 value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: col,
                 to_row: i,
             })
-            break dance;
+            break MovesUp;
         }
     }
-    //Eat row behind
-    dance:
+    
+    MovesDown:
     for (let i = (row - 1); i >= min; i--) {
         if (turnPieces.includes(table[i][col])) {
             if (table[i + 1][col] == ' ') {
                 possibleMovements.push({
-                    num:26,
+                    num: 26,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -58,30 +58,30 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: i + 1,
                 })
             }
-            break dance;
+            break MovesDown;
         }
         if (counterPieces.includes(table[i][col])) {
             possibleMovements.push({
-                num:27,
+                num: 27,
                 value: ((valuePieces[letterToName[table[i][col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: col,
                 to_row: i,
             })
-            break dance;
+            break MovesDown;
         }
     }
 
     //Col - Moves
-    //Eat col right
-    dance:
+    
+    MovesRight:
     for (let i = (col + 1); i < max; i++) {
 
         if (turnPieces.includes(table[row][i])) {
             if (table[row][i - 1] == ' ') {
                 possibleMovements.push({
-                    num:28,
+                    num: 28,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -89,27 +89,27 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: row,
                 })
             }
-            break dance;
+            break MovesRight;
         }
         if (counterPieces.includes(table[row][i])) {
             possibleMovements.push({
-                num:29,
+                num: 29,
                 value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: i,
                 to_row: row,
             })
-            break dance;
+            break MovesRight;
         }
     }
-    //Eat col left
-
+  
+    MovesLeft:
     for (let i = (col - 1); i >= min; i--) {
         if (turnPieces.includes(table[row][i])) {
             if (table[row][i + 1] == ' ') {
                 possibleMovements.push({
-                    num:30,
+                    num: 30,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -117,28 +117,28 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: row,
                 })
             }
-            break
+            break MovesLeft
         }
         if (counterPieces.includes(table[row][i])) {
             possibleMovements.push({
-                num:31,
+                num: 31,
                 value: ((valuePieces[letterToName[table[row][i]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: i,
                 to_row: row,
             })
-            break
+            break MovesLeft
         }
     }
 
-    dance:
+    MovesUpRight:
     for (let i = (row + 1), j = (col + 1); i < max && j < max; i++, j++) {
 
         if (turnPieces.includes(table[i][j])) {
             if (table[i - 1][j - 1] == ' ') {
                 possibleMovements.push({
-                    num:32,
+                    num: 32,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -146,38 +146,38 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: (i - 1),
                 })
             }
-            break dance;
+            break MovesUpRight
         }
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
-                num:33,
+                num: 33,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
                 to_row: i,
             })
-            break dance;
+            break MovesUpRight
         }
     }
 
-    // comer diagonal izquierda arriba
+    MovesUpLeft:
     for (let i = (row + 1), j = (col - 1); i < max && j >= min; i++, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
-                num:34,
+                num: 34,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
                 to_row: i,
             })
-            break
+            break MovesUpLeft
         }
         if (turnPieces.includes(table[i][j])) {
             if (table[i - 1][j + 1] == ' ') {
                 possibleMovements.push({
-                    num:35,
+                    num: 35,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -185,26 +185,27 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: (i - 1),
                 })
             }
-            break
+            break MovesUpLeft
         }
     }
-    //eat diagonal izquierda abajo
+    
+    MovesDownLeft:
     for (let i = (row - 1), j = (col - 1); i >= min && j >= min; i--, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
-                num:36,
+                num: 36,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
                 to_row: i,
             })
-            break
+            break MovesDownLeft
         }
         if (turnPieces.includes(table[i][col])) {
             if (table[i + 1][j + 1] == ' ') {
                 possibleMovements.push({
-                    num:37,
+                    num: 37,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -212,16 +213,16 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: (i + 1),
                 })
             }
-            break
+            break MovesDownLeft
         }
     }
-    //eat diagonal derecha abajo
-    dance:
+    
+    MovesDownRight:
     for (let i = (row - 1), j = (col + 1); i >= min && j < max; i--, j++) {
         if (turnPieces.includes(table[i][j])) {
             if (table[i + 1][j - 1] == ' ') {
                 possibleMovements.push({
-                    num:38,
+                    num: 38,
                     value: valuePieces.Queen,
                     from_row: row,
                     from_col: col,
@@ -229,19 +230,19 @@ function queenMoves(table, row, col, turnColor) {
                     to_row: (i + 1),
                 })
             }
-            break dance;
+            break MovesDownRight
         }
         if (counterPieces.includes(table[i][j])) {
 
             possibleMovements.push({
-                num:39,
+                num: 39,
                 value: ((valuePieces[letterToName[table[i][j]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,
                 to_col: j,
                 to_row: i,
             })
-            break dance;
+            break MovesDownRight
         }
     }
     return possibleMovements

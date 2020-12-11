@@ -1,5 +1,5 @@
 const { rookMoves } = require("../src/piecesMoves/rookMoves");
-const { tablesRook } = require("./mockTables");
+const { tablesRook } = require("./mockTables/mockTables");
 
 describe('rookMoves test', () => {
      test('Move up', () => {

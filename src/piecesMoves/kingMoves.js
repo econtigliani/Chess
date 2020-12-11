@@ -3,10 +3,11 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
+const white = 'white'
 
 function kingMoves(table, row, col, turnColor) {
-       
-    if (turnColor == 'white') {
+
+    if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {
@@ -31,7 +32,7 @@ function kingMoves(table, row, col, turnColor) {
 
         if ((table[move_row][move_col] == ' ')) {
             possibleMovements.push({
-                num:40,
+                num: 40,
                 value: valuePieces.King,
                 from_row: row,
                 from_col: col,
@@ -41,7 +42,7 @@ function kingMoves(table, row, col, turnColor) {
         }
         if (counterPieces.includes(table[move_row][move_col])) {
             possibleMovements.push({
-                num:41,
+                num: 41,
                 value: ((valuePieces[letterToName[table[move_row][move_col]]]) * weightPieces.eating),
                 from_row: row,
                 from_col: col,

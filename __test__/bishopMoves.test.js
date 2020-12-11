@@ -1,5 +1,5 @@
 const { bishopMoves } = require("../src/piecesMoves/bishopMoves")
-const { tablesBishop } = require("./mockTables")
+const { tablesBishop } = require("./mockTables/mockTables")
 
 
 describe('bishopMoves test', () => {

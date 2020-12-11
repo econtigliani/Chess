@@ -1,4 +1,4 @@
-const { tablesQueen } = require("./mockTables");
+const { tablesQueen } = require("./mockTables/mockTables");
 const { queenMoves } = require("../src/piecesMoves/queenMoves")
 describe('queenMoves test', () => {
 
