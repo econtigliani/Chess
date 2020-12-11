@@ -38,7 +38,7 @@ ws.on('connect', function (connection) {
                 console.log("challenged by ", data.data.username)
 
                 //manda la respuesta al desafio
-                connection.sendUTF(Challenged.challenged(data.data));
+                connection.sendUTF(Challenged.challenged(data.data.board_id));
                 break;
 
             case 'your_turn':

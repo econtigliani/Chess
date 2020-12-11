@@ -5,7 +5,7 @@ const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
 
 
-const MAXDEPTH = 3
+const MAXDEPTH = 2
 
 function moveColor(board, colour, profundidad = MAXDEPTH) {
 
@@ -37,7 +37,7 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
                 possibleTable = moveTable(board, pm)
                 bestMoveCounter = profundidad == 1 ?  0 : moveColor(possibleTable, white, profundidad - 1).value
 
-                pm.value = profundidad * pm.value - bestMoveCounter
+                pm.value =  pm.value - bestMoveCounter
 
 
             });
