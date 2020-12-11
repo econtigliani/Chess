@@ -5,12 +5,11 @@ const { bishopMoves } = require("../piecesMoves/bishopMoves");
 const { kingMoves } = require("../piecesMoves/kingMoves")
 const { queenMoves } = require("../piecesMoves/queenMoves")
 const { horseMoves } = require("../piecesMoves/horseMoves");
-
+const color = 'white'
 
 function moveWhite(table) {
     let possibleMovements = []
     let temp = []
-    const color = 'white'
     //itero sobre toda la table buscando mis piezas
     table.forEach((array,row) => array.forEach((element,col) => {
 
