@@ -1,6 +1,6 @@
 const { whitePieces, blackPieces } = require("../enums/pieces")
 
-function moveTable(table,move) { // Capaz vale la pena cambiar el nombre para que no signifique solamente move
+function moveTable(table,move) { 
     
     let newtable= table.map(function(arr) {
         return arr.slice();
