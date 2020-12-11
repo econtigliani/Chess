@@ -1,6 +1,6 @@
 
 const { maketable } = require("../src/util/makeTable");
-const { tableInit } = require("./mockTables");
+const { tableInit } = require("./mockTables/mockTables");
 const boardInit = 'rrhhbbqqkkbbhhrrrrhhbbqqkkbbhhrrpppppppppppppppppppppppppppppppp                                                                                                                                PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPRRHHBBQQKKBBHHRRRRHHBBQQKKBBHHRR' 
 
 describe('make table test', () => {

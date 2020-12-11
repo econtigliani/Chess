@@ -1,7 +1,27 @@
 const { pawnMovesBlack, pawnMovesWhite } = require("../src/piecesMoves/pawnMoves");
-const { tablesPawn, tableInit } = require("./mockTables");
+const { tablesPawn, tableInit } = require("./mockTables/mockTables");
 
 describe('pawnMoves test', () => {
+    
+    test('Promote', () => {
+        expect(pawnMovesBlack(tablesPawn.Promote , 6, 0)).toStrictEqual([
+            {
+                value: 130,
+                from_row: 6,
+                from_col: 0,
+                to_row: 7,
+                to_col: 0,
+            },
+            {
+                value: 500,
+                from_row: 6,
+                from_col: 0,
+                to_row: 7,
+                to_col: 0,
+
+            }
+        ])
+    })
     test('first movement 2 places into 5 row', () => {
         expect(pawnMovesBlack(tableInit , 3, 0)).toStrictEqual([
             {
@@ -85,6 +105,29 @@ describe('pawnMoves test', () => {
 
 })
 describe('pawnMovesWhite test', () => {
+      
+    test('Promote', () => {
+        expect(pawnMovesWhite(tablesPawn.Promote , 9, 0)).toStrictEqual([
+            {
+                num: 3,
+                value: 130,
+                from_row: 9,
+                from_col: 0,
+                to_row: 8,
+                to_col: 0,
+            },
+            {
+                num:300,
+                value: 500,
+                from_row: 9,
+                from_col: 0,
+                to_row: 8,
+                to_col: 0,
+
+            }
+        ])
+    })
+
     test('first movement 2 places into 12 row', () => {
         expect(pawnMovesWhite(tableInit, 12, 0)).toStrictEqual([
             {
