@@ -5,7 +5,7 @@ const { bishopMoves } = require("../piecesMoves/bishopMoves");
 const { kingMoves } = require("../piecesMoves/kingMoves")
 const { queenMoves } = require("../piecesMoves/queenMoves")
 const { horseMoves } = require("../piecesMoves/horseMoves");
-const { max, min } = require("../enums/limitsBoard")
+
 
 function moveWhite(table) {
     let possibleMovements = []
