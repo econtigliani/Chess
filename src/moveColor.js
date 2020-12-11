@@ -5,7 +5,7 @@ const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
 
 
-const MAXDEPTH = 5
+const MAXDEPTH = 3
 
 function moveColor(board, colour, profundidad = MAXDEPTH) {
 
