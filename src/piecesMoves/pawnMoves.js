@@ -9,6 +9,7 @@ const weightPieces = require("../enums/weightPieces").weightPieces
 function pawnMovesWhite(table, row, col) {
 
     let possibleMovements = []
+
     // Move 2 places in the first movement.
     if ((row == 13) && (table[row - 1][col] == ' ') && (table[row - 2][col] == ' ')) {
 
@@ -23,7 +24,8 @@ function pawnMovesWhite(table, row, col) {
             }
         )
     }
-    //si todavia no se mueve y no tiene nada en las dos filas de adelante, que se mueva 2 filas
+
+    //Move 2 places in the first movement of the second line.
     if ((row == 12) && (table[row - 1][col] == ' ' && table[row - 2][col] == ' ')) {
 
         possibleMovements.push(
@@ -37,8 +39,8 @@ function pawnMovesWhite(table, row, col) {
             }
         )
     }
-    // Move 1 place
 
+    // Move 1 place
     if (table[row - 1][col] == ' ') {
         possibleMovements.push({
             num: 3,
@@ -92,6 +94,7 @@ function pawnMovesWhite(table, row, col) {
 
 function pawnMovesBlack(table, row, col) {
     let possibleMovements = []
+
     // Move 2 places in the first movement.
     if ((row == 3) && (table[row + 1][col] == ' ') && (table[row + 2][col] == ' ')) {
 
@@ -104,6 +107,7 @@ function pawnMovesBlack(table, row, col) {
         })
     }
 
+    //Move 2 places in the first movement of the second line.
     if ((row == 2) && (table[row + 1][col] == ' ') && (table[row + 2][col] == ' ')) {
 
         possibleMovements.push({
@@ -126,7 +130,7 @@ function pawnMovesBlack(table, row, col) {
         })
     }
 
-    //promote
+    //Promote
     if ((table[row + 1][col] == ' ') && row == 6) {
         possibleMovements.push({
             value: 500,

@@ -17,6 +17,8 @@ function bishopMoves(table, row, col, turnColor) {
     }
 
     let possibleMovements = [];
+
+    MoveUpRight:
     for (let i = (row + 1), j = (col + 1); i < max && j < max; i++, j++) {
 
         if (counterPieces.includes(table[i][j])) {
@@ -28,7 +30,7 @@ function bishopMoves(table, row, col, turnColor) {
                 to_col: j,
                 to_row: i,
             })
-            break
+            break MoveUpRight
         }
         if (turnPieces.includes(table[i][j])) {
             if (table[i - 1][j - 1] == ' ') {
@@ -41,11 +43,11 @@ function bishopMoves(table, row, col, turnColor) {
                     to_row: (i - 1),
                 })
             }
-            break
+            break MoveUpRight
         }
     }
 
-    // comer diagonal izquierda arriba
+    MoveUpLeft:
     for (let i = (row + 1), j = (col - 1); i < max && j >= min; i++, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
@@ -56,7 +58,7 @@ function bishopMoves(table, row, col, turnColor) {
                 to_col: j,
                 to_row: i,
             })
-            break
+            break MoveUpLeft
         }
         if (turnPieces.includes(table[i][j])) {
             if (table[i - 1][j + 1] == ' ') {
@@ -69,10 +71,11 @@ function bishopMoves(table, row, col, turnColor) {
                     to_row: (i - 1),
                 })
             }
-            break
+            break MoveUpLeft
         }
     }
-    //eat diagonal izquierda abajo
+    
+    MoveDownLeft:
     for (let i = (row - 1), j = (col - 1); i >= min && j >= min; i--, j--) {
         if (counterPieces.includes(table[i][j])) {
             possibleMovements.push({
@@ -83,7 +86,7 @@ function bishopMoves(table, row, col, turnColor) {
                 to_col: j,
                 to_row: i,
             })
-            break
+            break MoveDownLeft
         }
         if (turnPieces.includes(table[i][j])) {
             if (table[i + 1][j + 1] == ' ') {
@@ -96,10 +99,11 @@ function bishopMoves(table, row, col, turnColor) {
                     to_row: (i + 1),
                 })
             }
-            break
+            break MoveDownLeft
         }
     }
-    //eat diagonal derecha abajo
+    
+    MoveDownRight:
     for (let i = (row - 1), j = (col + 1); i >= min && j < max; i--, j++) {
         if (counterPieces.includes(table[i][j])) {
 
@@ -111,7 +115,7 @@ function bishopMoves(table, row, col, turnColor) {
                 to_col: j,
                 to_row: i,
             })
-            break
+            break MoveDownRight
         }
         if (turnPieces.includes(table[i][j])) {
             if (table[i + 1][j - 1] == ' ') {
@@ -124,7 +128,7 @@ function bishopMoves(table, row, col, turnColor) {
                     to_row: (i + 1),
                 })
             }
-            break
+            break MoveDownRight
         }
     }
     return possibleMovements;
