@@ -85,9 +85,7 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
     }
 
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
-    if (result.value > 4000){
-        console.log("result: ", result)
-    }
+
         return result;
 }
 
