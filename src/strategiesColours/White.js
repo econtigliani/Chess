@@ -5,17 +5,18 @@ const { bishopMoves } = require("../piecesMoves/bishopMoves");
 const { kingMoves } = require("../piecesMoves/kingMoves")
 const { queenMoves } = require("../piecesMoves/queenMoves")
 const { horseMoves } = require("../piecesMoves/horseMoves");
-const { max, min } = require("../enums/limitsBoard")
+
 
 function moveWhite(table) {
     let possibleMovements = []
     let temp = []
     const color = 'white'
     //itero sobre toda la table buscando mis piezas
-    for (let col = min; col < max; col++) {
-        for (let row = min; row < max; row++) {
+    table.forEach((array,row) => array.forEach((element,col) => {
 
-            switch (table[row][col]) {
+        switch (element) {
+                case ' ':
+                    break
 
                 case whitePieces[0]://Pawn
                     temp = pawnMovesWhite(table, row, col)
@@ -45,8 +46,7 @@ function moveWhite(table) {
                     break;
             }
             possibleMovements = possibleMovements.concat(temp)
-        }
-    }
+        }))
     return possibleMovements
 }
 module.exports.moveWhite = moveWhite
