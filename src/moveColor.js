@@ -3,6 +3,7 @@ const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
+const { placeWeight } = require("./util/weightPlaces");
 
 
 const MAXDEPTH = 3
@@ -60,8 +61,9 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
 
     // busco cual de los resultados es el que tiene el mayor valor.
     let maxValue = -999999999999;
-
+    
     possibleMovements.forEach(pm => {
+        pm.value = pm.value + placeWeight(pm.from_col)
         if (pm.value >= maxValue) {
             maxValue = pm.value
         }
