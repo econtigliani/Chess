@@ -5,7 +5,7 @@ const { maketable } = require("./util/makeTable");
 const { moveTable } = require("./util/moveTable");
 
 
-const MAXDEPTH = 2
+const MAXDEPTH = 3
 
 function moveColor(board, colour, profundidad = MAXDEPTH) {
 
@@ -17,7 +17,6 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
     let possibleTable
     let possibleTableCounter
 
-
     //genero una matriz 
     if (profundidad == MAXDEPTH) {
         board = maketable(board)
@@ -26,7 +25,6 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
     if (colour == white) {
         possibleMovements = moveWhite(board)
         if (profundidad > 0) {
-            bestMoveCounter = 0
 
             possibleMovements.forEach(pm => {
 
@@ -35,8 +33,8 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
                 bestMoveCounter = 0
 
                 possibleTable = moveTable(board, pm)
-                bestMoveCounter = profundidad == 1 ?  0 : moveColor(possibleTable, white, profundidad - 1).value
-
+                bestMoveCounter = profundidad == 1 ?  0 : moveColor(possibleTable, black, profundidad - 1).value
+                //console.log(bestMoveCounter)
                 pm.value =  pm.value - bestMoveCounter
 
 
@@ -45,7 +43,6 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
     } else {
         possibleMovements = moveBlack(board)
         if (profundidad > 0) {
-            bestMoveCounter = 0
 
             possibleMovements.forEach(pm => {
 
@@ -86,7 +83,7 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
     }
 
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
-    if (result.value == undefined){
+    if (result.value > 4000){
         console.log("result: ", result)
     }
         return result;
