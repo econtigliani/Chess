@@ -35,8 +35,12 @@ function moveColor(board, colour, profundidad = MAXDEPTH) {
 
                 possibleTable = moveTable(board, pm)
                 bestMoveCounter = profundidad == 1 ?  0 : moveColor(possibleTable, black, profundidad - 1).value
-                //console.log(bestMoveCounter)
-                pm.value =  pm.value * profundidad - bestMoveCounter
+                if (profundida = 3){
+                    pm.value =  pm.value *2 - bestMoveCounter
+                } else{
+                    pm.value =  pm.value- bestMoveCounter
+                }
+                
 
 
             });
