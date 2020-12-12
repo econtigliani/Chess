@@ -1,4 +1,5 @@
-const { pawnMovesBlack} = require("../piecesMoves/pawnMoves");
+
+const { pawnMovesBlack } = require("../piecesMoves/pawnMoves");
 const { rookMoves } = require("../piecesMoves/rookMoves");
 const { bishopMoves } = require("../piecesMoves/bishopMoves");
 const { kingMoves } = require("../piecesMoves/kingMoves")
@@ -12,10 +13,11 @@ function moveBlack(table) {
     let possibleMovements = []
     let temp = []
     //itero sobre toda la table buscando mis piezas
-    table.forEach((array,row) => array.forEach((element,col) => {
+    table.forEach((array, row) => array.forEach((element, col) => {
 
         switch (element) {
             case ' ':
+                temp = []
                 break
 
             case blackPieces[0]://Pawn
@@ -43,11 +45,12 @@ function moveBlack(table) {
                 break
 
             default:
-                break
+                temp = []
+                break;
         }
         possibleMovements = possibleMovements.concat(temp)
     }))
- 
+
     return possibleMovements
 }
 

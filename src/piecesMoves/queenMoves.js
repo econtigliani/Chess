@@ -3,10 +3,10 @@ const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
 const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
-const white = 'white'
+const { white } = require("../enums/colours")
 
 function queenMoves(table, row, col, turnColor) {
-
+       
     if (turnColor == white) {
         turnPieces = whitePieces
         counterPieces = blackPieces

@@ -62,41 +62,41 @@ describe('rookMoves test', () => {
     }) 
 
     test('Eat col right', () => {
-        expect(rookMoves(tablesRook.eatCol , 11, 15,'black')).toStrictEqual([
-            {
-                num: 13,
-                value: 600,
-                from_row: 11,
-                from_col: 15,
-                to_row: 11,
-                to_col: 0,
-            },
-
-        ])
-
-    }) 
-    test('Eat col left', () => {
-        expect(rookMoves(tablesRook.eatCol , 11, 0,'white')).toStrictEqual([
+        expect(rookMoves(tablesRook.eatCol , 0, 0,'black')).toStrictEqual([
             {
                 num: 11,
                 value: 600,
-                from_row: 11,
+                from_row: 0,
                 from_col: 0,
-                to_row: 11,
+                to_row: 0,
                 to_col: 15,
             },
 
         ])
 
     }) 
+    test('Eat col left', () => {
+        expect(rookMoves(tablesRook.eatCol , 15, 15,'white')).toStrictEqual([
+            {
+                num: 13,
+                value: 600,
+                from_row: 15,
+                from_col: 15,
+                to_row: 15,
+                to_col: 0,
+            },
+
+        ])
+
+    }) 
     test('Eat row down', () => {
-        expect(rookMoves(tablesRook.eatRow , 12, 0,'white')).toStrictEqual([
+        expect(rookMoves(tablesRook.eatRow , 15, 0,'white')).toStrictEqual([
             {
                 num: 9,
                 value: 600,
-                from_row: 12,
+                from_row: 15,
                 from_col: 0,
-                to_row: 3,
+                to_row: 0,
                 to_col: 0,
             },
 
@@ -105,13 +105,13 @@ describe('rookMoves test', () => {
     })
 
     test('Eat row up', () => {
-        expect(rookMoves(tablesRook.eatRow , 3, 0,'black')).toStrictEqual([
+        expect(rookMoves(tablesRook.eatRow , 0, 0,'black')).toStrictEqual([
             {
                 num: 7,
                 value: 600,
-                from_row: 3,
+                from_row: 0,
                 from_col: 0,
-                to_row: 12,
+                to_row: 15,
                 to_col: 0,
             },
 

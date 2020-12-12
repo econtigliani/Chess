@@ -28,7 +28,6 @@ ws.on('connect', function (connection) {
         switch (data.event) {
 
             case 'update_user_list':
-                console.log(data.data.users_list);
                 break;
 
             case 'ask_challenge':

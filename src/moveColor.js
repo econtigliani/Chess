@@ -1,30 +1,73 @@
+const { black, white } = require("./enums/colours");
 const { moveBlack } = require("./strategiesColours/Black");
 const { moveWhite } = require("./strategiesColours/White");
 const { maketable } = require("./util/makeTable");
-const white = 'white'
+const { moveTable } = require("./util/moveTable");
+const { placeWeight } = require("./util/weightPlaces");
 
 
-function moveColor(board, colour) {
+const MAXDEPTH = 3
 
+function moveColor(board, colour, profundidad = MAXDEPTH) {
 
     //vacio el arreglo porque tiene movimientos de la jugada anterior
+
     let possibleMovements = []
+    let result;
+    let bestMoveCounter
+    let possibleTable
+    let possibleTableCounter
 
     //genero una matriz 
-    let table
-    table = maketable(board)
-
-    if (colour == white) {
-        possibleMovements = moveWhite(table)
-    } else {
-        possibleMovements = moveBlack(table)
+    if (profundidad == MAXDEPTH) {
+        board = maketable(board)
     }
 
-    //console.log(possibleMovements)
-    // busco cual de los resultados es el que tiene el mayor valor.
-    let maxValue = 0;
+    if (colour == white) {
+        possibleMovements = moveWhite(board)
+        if (profundidad > 0) {
 
+            possibleMovements.forEach(pm => {
+
+                possibleTable = []
+                possibleTableCounter = []
+                bestMoveCounter = 0
+
+                possibleTable = moveTable(board, pm)
+                bestMoveCounter = profundidad == 1 ?  0 : moveColor(possibleTable, black, profundidad - 1).value
+                if (profundida = 3){
+                    pm.value =  pm.value *2 - bestMoveCounter
+                } else{
+                    pm.value =  pm.value- bestMoveCounter
+                }
+                
+
+
+            });
+        }
+    } else {
+        possibleMovements = moveBlack(board)
+        if (profundidad > 0) {
+
+            possibleMovements.forEach(pm => {
+
+                possibleTable = []
+                possibleTableCounter = []
+                bestMoveCounter = 0
+                possibleTable = moveTable(board, pm)
+                bestMoveCounter = profundidad == 1 ?  0 : moveColor(possibleTable, white, profundidad - 1).value
+
+                pm.value = pm.value * profundidad - bestMoveCounter
+
+            });
+        }
+    }
+
+    // busco cual de los resultados es el que tiene el mayor valor.
+    let maxValue = -999999999999;
+    
     possibleMovements.forEach(pm => {
+        pm.value = pm.value + placeWeight(pm.from_col)
         if (pm.value >= maxValue) {
             maxValue = pm.value
         }
@@ -34,11 +77,10 @@ function moveColor(board, colour) {
     let index = 0;
     index = possibleMovements.findIndex(s => s.value == maxValue);
 
-    console.table(table)
+    //console.table(table)
 
-    let result;
     result = {
-        num: possibleMovements[index].num,
+        //num: possibleMovements[index].num,
         value: possibleMovements[index].value,
         from_row: possibleMovements[index].from_row,
         from_col: possibleMovements[index].from_col,
@@ -46,10 +88,9 @@ function moveColor(board, colour) {
         to_col: possibleMovements[index].to_col,
     }
 
-
     // devuelvo un json con los datos desde y hacia del movimiento de mayor valor
-    console.log("result: ", result)
-    return result;
+
+        return result;
 }
 
 module.exports.moveColor = moveColor;
