@@ -1,5 +1,5 @@
 const moveTable = require("../src/util/moveTable").moveTable
-const { tableInit,tableMoveTable } = require("./mockTables")
+const { tableInit,tableMoveTable } = require("./mockTables/mockTables")
 
 const movePawn = {
     num:1,
