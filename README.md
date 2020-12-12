@@ -10,7 +10,7 @@ Use node.js and jest for testing.
 
 ## How to run
 Two steps:
-* First create a authentoken.txt with your authtoken.
+* First create a authtoken.txt with your authtoken.
 * Second run with:
     ```
     npm start.
