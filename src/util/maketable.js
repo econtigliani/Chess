@@ -1,4 +1,4 @@
-const { min, max } = require("../enums/limitsBoard");
+const { max, min } = require("../enums/limitsBoard");
 
 //read board
 function maketable(board) {
@@ -6,9 +6,9 @@ function maketable(board) {
     let index = 0;
     let matrix = [];
 
-    for (let i = min; i < max; i++) {
+    for (let i = 0; i < max; i++) {
         let row = [];
-        for (let j = min; j < max; j++) {
+        for (let j = 0; j < max; j++) {
             row.push(board[index]);
             index++;
         }
@@ -16,5 +16,6 @@ function maketable(board) {
     }
     return matrix;
 }
-
-module.exports.maketable = maketable;
+module.exports = {
+    maketable : maketable,
+}
