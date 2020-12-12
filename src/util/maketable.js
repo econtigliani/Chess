@@ -6,9 +6,9 @@ function maketable(board) {
     let index = 0;
     let matrix = [];
 
-    for (let i = 0; i < max; i++) {
+    for (let i = min; i < max; i++) {
         let row = [];
-        for (let j = 0; j < max; j++) {
+        for (let j = min; j < max; j++) {
             row.push(board[index]);
             index++;
         }
