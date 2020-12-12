@@ -1,8 +1,8 @@
-const black = 'black'
-const white = 'white'
-
+const colours = {
+    black : 'black',
+    white : 'white'
+}
 
 module.exports = {
-    black : black,
-    white: white
+    colours: colours
 }

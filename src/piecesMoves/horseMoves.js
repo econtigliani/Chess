@@ -1,12 +1,12 @@
 const { blackPieces, whitePieces } = require("../enums/pieces")
 const { letterToName } = require('../enums/letterToName')
 const { valuePieces } = require("../enums/valuePieces")
-const { weightPieces } = require("../enums/weightPieces")
+const weightPieces = require("../enums/weightPieces").weightPieces
 const { max, min } = require("../enums/limitsBoard")
-const { white } = require("../enums/colours")
+const { colours } = require("../enums/colours")
 
 function horseMoves(table, row, col, turnColor) {
-    if (turnColor == white) {
+    if (turnColor == colours.white) {
         turnPieces = whitePieces
         counterPieces = blackPieces
     } else {

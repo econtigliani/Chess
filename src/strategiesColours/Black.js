@@ -1,4 +1,3 @@
-
 const { pawnMovesBlack } = require("../piecesMoves/pawnMoves");
 const { rookMoves } = require("../piecesMoves/rookMoves");
 const { bishopMoves } = require("../piecesMoves/bishopMoves");
@@ -6,13 +5,14 @@ const { kingMoves } = require("../piecesMoves/kingMoves")
 const { queenMoves } = require("../piecesMoves/queenMoves")
 const { horseMoves } = require("../piecesMoves/horseMoves");
 const { blackPieces } = require("../enums/pieces");
-const color = 'black'
+const { colours } = require("../enums/colours");
+
 
 function moveBlack(table) {
 
     let possibleMovements = []
     let temp = []
-    //itero sobre toda la table buscando mis piezas
+    
     table.forEach((array, row) => array.forEach((element, col) => {
 
         switch (element) {
@@ -25,28 +25,28 @@ function moveBlack(table) {
                 break
 
             case blackPieces[1]://Rook
-                temp = rookMoves(table, row, col, color)
+                temp = rookMoves(table, row, col, colours.black)
                 break
 
             case blackPieces[2]://Bishop
-                temp = bishopMoves(table, row, col, color)
+                temp = bishopMoves(table, row, col, colours.black)
                 break;
 
             case blackPieces[3]://Horse
-                temp = horseMoves(table, row, col, color)
+                temp = horseMoves(table, row, col, colours.black)
                 break
 
             case blackPieces[4]://Queen
-                temp = queenMoves(table, row, col, color)
+                temp = queenMoves(table, row, col, colours.black)
                 break
 
             case blackPieces[5]://King
-                temp = kingMoves(table, row, col, color)
+                temp = kingMoves(table, row, col, colours.black)
                 break
 
             default:
                 temp = []
-                break;
+                break
         }
         possibleMovements = possibleMovements.concat(temp)
     }))
