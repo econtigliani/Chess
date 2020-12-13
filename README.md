@@ -16,7 +16,7 @@ Two steps:
     npm start.
     ```
 ## Strategy
-My bot plays with a recursive algorithm similar to minimax where it calculates the possible movements of the turn, the possible movements of the opponent in response.
+My bot plays with a recursive algorithm similar to minimax where it calculates the possible movements of the turn, the best possible movements of the opponent in response and my best next move.
 
 ### Thanks for read me :D
 Any questions? Ask me:
