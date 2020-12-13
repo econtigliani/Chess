@@ -16,7 +16,7 @@ function moveWhite(table) {
         switch (element) {
             case ' ':
                 temp = []
-                break
+                break;
 
             case whitePieces[0]://Pawn
                 temp = pawnMovesWhite(table, row, col)
@@ -43,6 +43,7 @@ function moveWhite(table) {
                 break;
 
             default:
+                temp = []
                 break;
         }
         possibleMovements = possibleMovements.concat(temp)
