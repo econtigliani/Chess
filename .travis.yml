@@ -1,13 +1,6 @@
-sudo: false
+language: node_js
+node_js: 
+  - "stable"
 
-lenguaje: node_js
-
-node_js:
-- node
-
- script:
-
-- npm run test:coveralls
-
-nofications:
-  email: false
+script:
+  - npm run test:coveralls
