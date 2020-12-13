@@ -1,0 +1,12 @@
+sudo: false
+
+lenguaje: node_js
+
+node_js:
+- node
+
+ script:
+- npm run test:coveralls
+
+notifications:
+  - email: false
